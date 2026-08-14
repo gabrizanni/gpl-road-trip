@@ -333,7 +333,10 @@ function buildStations(registryRows, priceRows, routes, now) {
         const zoneDistanceKm = haversineKm(point, window.center);
         if (zoneDistanceKm > window.radiusKm) continue;
         const route = routeMetrics(point, leg.route);
+        route.progressKm = Number((route.progressKm * (Number(leg.distanceScale) || 1)).toFixed(1));
         if (route.distanceKm > 12) continue;
+        if (Number.isFinite(window.minProgressKm) && route.progressKm < window.minProgressKm) continue;
+        if (Number.isFinite(window.maxProgressKm) && route.progressKm > window.maxProgressKm) continue;
         candidates.push({
           station,
           match: {

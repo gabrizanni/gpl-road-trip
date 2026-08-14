@@ -34,6 +34,15 @@ const legZones = new Map(
 const expectedWindows = routes.legs.flatMap((leg) =>
   leg.fuelWindows.map((zone) => `${leg.id}/${zone.id}`),
 );
+const vehicle = routes.vehicle || {};
+assert(vehicle.planningRangeKm >= 300 && vehicle.planningRangeKm <= 320, "il target GPL predefinito deve essere tra 300 e 320 km");
+assert(vehicle.planningRangeMinKm === 300, "il selettore GPL deve partire da 300 km");
+assert(vehicle.planningRangeMaxKm === 320, "il selettore GPL deve arrivare a 320 km");
+const dayOne = routes.legs.find((leg) => leg.id === "day-1");
+const airportIndex = dayOne?.stops.findIndex((stop) => /aeroporto/i.test(stop.name)) ?? -1;
+const bolognaFuelIndex = dayOne?.stops.findIndex((stop) => stop.fuelZone === "bologna") ?? -1;
+assert(airportIndex >= 0 && !dayOne.stops[airportIndex]?.fuelZone, "l’aeroporto deve essere una tappa senza rifornimento");
+assert(bolognaFuelIndex > airportIndex, "il rifornimento GPL di Bologna deve seguire l’aeroporto");
 const seenWindows = new Set();
 const ids = new Set();
 

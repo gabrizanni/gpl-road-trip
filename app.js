@@ -11,6 +11,7 @@
   });
   const decimal = new Intl.NumberFormat("it-IT", { maximumFractionDigits: 1 });
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isFiniteNumber = (value) => value !== null && value !== "" && Number.isFinite(Number(value));
 
   const state = {
     config: null,
@@ -18,11 +19,15 @@
     day: new URLSearchParams(location.search).get("day") === "2" ? 2 : 1,
     zoneId: null,
     filter: localStorage.getItem("gpl-road-trip-filter") || "balanced",
+    planningRangeKm: null,
+    allowPetrol: true,
     selectedId: null,
     map: null,
     routeLayer: null,
     stationLayer: null,
     markers: new Map(),
+    resizeObserver: null,
+    mapLayoutFrame: null,
     installPrompt: null,
     currentStations: []
   };
@@ -34,6 +39,17 @@
   function currentZone() {
     const leg = currentLeg();
     return leg.fuelWindows.find((zone) => zone.id === state.zoneId) || leg.fuelWindows[0];
+  }
+
+  function normalizedPlanningRange(value) {
+    const vehicle = state.config.vehicle;
+    const minimum = Number(vehicle.planningRangeMinKm) || 300;
+    const maximum = Number(vehicle.planningRangeMaxKm) || 320;
+    const step = Number(vehicle.planningRangeStepKm) || 10;
+    const numeric = Number(value);
+    const fallback = Number(vehicle.planningRangeKm) || 310;
+    const clamped = Math.min(maximum, Math.max(minimum, Number.isFinite(numeric) ? numeric : fallback));
+    return Math.round((clamped - minimum) / step) * step + minimum;
   }
 
   function toDate(value) {
@@ -97,12 +113,40 @@
 
   function filteredStations() {
     const zone = currentZone();
-    const stations = (state.snapshot?.stations || [])
+    const vehicle = state.config.vehicle;
+    const dynamicTarget = Boolean(zone.dynamicTarget);
+    const maximumProgressKm = Number(vehicle.declaredRangeKm)
+      + (state.allowPetrol ? Number(vehicle.petrolBufferKm) || 0 : 0);
+    let stations = (state.snapshot?.stations || [])
       .filter((station) => String(station.fuel || "GPL").toUpperCase() === "GPL")
-      .map((station) => ({ ...station, match: stationMatch(station) }))
+      .map((station) => {
+        const match = stationMatch(station);
+        const progressKm = Number(match?.progressKm);
+        return {
+          ...station,
+          match,
+          targetProgressKm: Number.isFinite(progressKm) ? progressKm : null,
+          targetDeltaKm: dynamicTarget && Number.isFinite(progressKm)
+            ? Math.abs(progressKm - state.planningRangeKm)
+            : null,
+          withinTarget: dynamicTarget && Number.isFinite(progressKm)
+            ? Math.abs(progressKm - state.planningRangeKm) <= 20
+            : false,
+          petrolKm: dynamicTarget && Number.isFinite(progressKm)
+            ? Math.max(0, progressKm - Number(vehicle.declaredRangeKm))
+            : 0
+        };
+      })
       .filter((station) => station.match);
 
-    const finite = (value, fallback = Number.POSITIVE_INFINITY) => Number.isFinite(Number(value)) ? Number(value) : fallback;
+    if (dynamicTarget) {
+      const feasible = stations.filter((station) =>
+        station.targetProgressKm === null || station.targetProgressKm <= maximumProgressKm
+      );
+      if (feasible.length) stations = feasible;
+    }
+
+    const finite = (value, fallback = Number.POSITIVE_INFINITY) => isFiniteNumber(value) ? Number(value) : fallback;
     const prices = stations.map((station) => finite(station.price)).filter(Number.isFinite);
     const minPrice = prices.length ? Math.min(...prices) : 0;
     const maxPrice = prices.length ? Math.max(...prices) : minPrice + 0.001;
@@ -113,15 +157,54 @@
       const distanceScore = Math.min(finite(station.match.routeDistanceKm, 24) / 12, 2);
       const freshnessScore = Math.min(ageHours(station.communicatedAt) / (24 * 14), 2);
       const curatedBonus = finite(station.match.priority, 9) * 0.035;
-      return priceScore * 0.55 + distanceScore * 0.25 + freshnessScore * 0.15 + curatedBonus;
+      const targetScore = dynamicTarget ? Math.min(finite(station.targetDeltaKm, 120) / 80, 2) : 0;
+      return dynamicTarget
+        ? priceScore * 0.32 + distanceScore * 0.18 + freshnessScore * 0.1 + targetScore * 0.4 + curatedBonus
+        : priceScore * 0.55 + distanceScore * 0.25 + freshnessScore * 0.15 + curatedBonus;
     };
 
     return stations.sort((a, b) => {
+      if (dynamicTarget) {
+        const targetDifference = finite(a.targetDeltaKm, 999) - finite(b.targetDeltaKm, 999);
+        if (Math.abs(targetDifference) > 10) return targetDifference;
+      }
       if (state.filter === "price") return finite(a.price) - finite(b.price);
       if (state.filter === "distance") return finite(a.match.routeDistanceKm) - finite(b.match.routeDistanceKm);
       if (state.filter === "fresh") return (toDate(b.communicatedAt)?.getTime() || 0) - (toDate(a.communicatedAt)?.getTime() || 0);
       return balancedScore(a) - balancedScore(b);
     });
+  }
+
+  function mappedStationsForCurrentLeg() {
+    const leg = currentLeg();
+    const zones = new Map(leg.fuelWindows.map((zone) => [zone.id, zone]));
+    return (state.snapshot?.stations || [])
+      .filter((station) => String(station.fuel || "GPL").toUpperCase() === "GPL")
+      .filter((station) => Number.isFinite(station.lat) && Number.isFinite(station.lng))
+      .map((station) => {
+        const explicitMatches = Array.isArray(station.matches)
+          ? station.matches.filter((match) => match.legId === leg.id && zones.has(match.zoneId))
+          : [];
+        const inferredMatches = explicitMatches.length
+          ? []
+          : leg.fuelWindows
+            .map((zone) => ({
+              legId: leg.id,
+              zoneId: zone.id,
+              zoneDistanceKm: haversine([station.lat, station.lng], zone.center),
+              routeDistanceKm: null
+            }))
+            .filter((match) => match.zoneDistanceKm <= zones.get(match.zoneId).radiusKm);
+        const legMatches = [...explicitMatches, ...inferredMatches].sort((a, b) => {
+          const zonePriority = (zones.get(a.zoneId)?.priority ?? 99) - (zones.get(b.zoneId)?.priority ?? 99);
+          if (zonePriority) return zonePriority;
+          return (Number(a.progressKm) || 0) - (Number(b.progressKm) || 0);
+        });
+        if (!legMatches.length) return null;
+        const activeMatch = legMatches.find((match) => match.zoneId === state.zoneId) || legMatches[0];
+        return { ...station, mapZoneId: activeMatch.zoneId, mapMatch: activeMatch };
+      })
+      .filter(Boolean);
   }
 
   function mapsUrl(station) {
@@ -141,6 +224,9 @@
 
   function stationMeta(station, includeHours = true) {
     const parts = [];
+    if (isFiniteNumber(station.targetProgressKm)) {
+      parts.push(`~${decimal.format(Number(station.targetProgressKm))} km dal pieno`);
+    }
     if (Number.isFinite(Number(station.match?.routeDistanceKm))) {
       parts.push(`~${decimal.format(Number(station.match.routeDistanceKm))} km dalla traccia indicativa`);
     }
@@ -223,9 +309,16 @@
 
   function renderVehicle() {
     const vehicle = state.config.vehicle;
-    const percentage = Math.round((vehicle.planningRangeKm / vehicle.declaredRangeKm) * 100);
+    const percentage = Math.round((state.planningRangeKm / vehicle.declaredRangeKm) * 100);
     $("#declared-range").textContent = String(vehicle.declaredRangeKm);
-    $("#planning-range").textContent = String(vehicle.planningRangeKm);
+    $("#planning-range").textContent = String(state.planningRangeKm);
+    const control = $("#planning-range-control");
+    control.min = String(vehicle.planningRangeMinKm || 300);
+    control.max = String(vehicle.planningRangeMaxKm || 320);
+    control.step = String(vehicle.planningRangeStepKm || 10);
+    control.value = String(state.planningRangeKm);
+    control.setAttribute("aria-valuetext", `Sosta obiettivo a circa ${state.planningRangeKm} chilometri dal pieno`);
+    $("#petrol-buffer-control").checked = state.allowPetrol;
     const ring = $(".range-ring");
     ring.style.setProperty("--range-percentage", `${percentage}%`);
     ring.setAttribute("aria-valuenow", String(percentage));
@@ -280,6 +373,14 @@
     hoursProof.className = "proof-chip proof-hours";
     hoursProof.textContent = station.openingHours || "Orari da verificare";
     proof.append(fuelProof, hoursProof);
+    if (isFiniteNumber(station.targetProgressKm)) {
+      const targetProof = document.createElement("span");
+      targetProof.className = `proof-chip ${station.petrolKm > 0 ? "proof-hours" : "proof-target"}`;
+      targetProof.textContent = station.petrolKm > 0
+        ? `~${decimal.format(station.targetProgressKm)} km · ~${decimal.format(station.petrolKm)} km a benzina`
+        : `~${decimal.format(station.targetProgressKm)} km dal pieno${station.withinTarget ? " · nel target" : ""}`;
+      proof.append(targetProof);
+    }
     copy.append(name, address, meta, proof, price);
 
     const actions = document.createElement("div");
@@ -297,6 +398,9 @@
   function fillStationMeta(node, station) {
     node.replaceChildren();
     const values = [
+      ...(isFiniteNumber(station.targetProgressKm)
+        ? [`~${decimal.format(Number(station.targetProgressKm))} km dal pieno${station.withinTarget ? " · nel target" : ""}`]
+        : []),
       Number.isFinite(Number(station.match?.routeDistanceKm))
         ? `~${decimal.format(Number(station.match.routeDistanceKm))} km dalla traccia`
         : "Distanza n.d.",
@@ -305,7 +409,8 @@
     ];
     values.forEach((value, index) => {
       const chip = document.createElement("span");
-      chip.className = `station-meta-chip${index === 2 ? " is-price" : ""}`;
+      const isTarget = isFiniteNumber(station.targetProgressKm) && index === 0;
+      chip.className = `station-meta-chip${isTarget ? " is-target" : ""}`;
       chip.textContent = value;
       node.append(chip);
     });
@@ -356,10 +461,12 @@
     return box;
   }
 
-  function renderStations() {
+  function renderStations({ fitMap = true } = {}) {
     const zone = currentZone();
     const stations = filteredStations();
-    $("#recommendation-title").textContent = zone.label;
+    $("#recommendation-title").textContent = zone.dynamicTarget
+      ? `Sosta intermedia · obiettivo ~${state.planningRangeKm} km`
+      : zone.label;
     $$(".filter-chip").forEach((button) => {
       const active = button.dataset.filter === state.filter;
       button.classList.toggle("is-active", active);
@@ -369,25 +476,20 @@
     if (!stations.some((station) => String(station.id) === String(state.selectedId))) {
       state.selectedId = stations[0]?.id ?? null;
     }
-    const primary = stations[0];
+    const primary = stations.find((station) => String(station.id) === String(state.selectedId)) || stations[0];
     renderPrimary(primary);
     state.currentStations = stations;
 
     const list = $("#station-list");
     list.replaceChildren();
-    const alternatives = stations.slice(1, 8);
-    $("#station-count").textContent = `${alternatives.length} alternativ${alternatives.length === 1 ? "a" : "e"}`;
+    const visibleStations = stations.slice(0, 8);
+    $("#station-count").textContent = `${visibleStations.length} distributor${visibleStations.length === 1 ? "e" : "i"}`;
     if (!stations.length) {
       list.append(renderEmptyList());
-    } else if (!alternatives.length) {
-      const note = document.createElement("div");
-      note.className = "empty-state empty-state-compact";
-      note.textContent = "Nessun’altra alternativa nella copia disponibile per questa area.";
-      list.append(note);
     } else {
-      alternatives.forEach((station, index) => list.append(stationCard(station, index + 2)));
+      visibleStations.forEach((station, index) => list.append(stationCard(station, index + 1)));
     }
-    updateMap(stations);
+    updateMap({ fit: fitMap });
   }
 
   function routeIcon(index) {
@@ -410,12 +512,16 @@
 
   function popupNode(station) {
     const root = document.createElement("div");
+    root.className = "station-popup";
     const title = document.createElement("strong");
     title.textContent = station.name || "Impianto GPL";
     const price = document.createElement("div");
     price.textContent = Number.isFinite(Number(station.price)) ? `${euro.format(Number(station.price))}/L` : "Prezzo n.d.";
-    const link = makeButtonLink("", "Avvia navigazione", mapsUrl(station));
-    root.append(title, price, link);
+    const area = document.createElement("small");
+    const zone = currentLeg().fuelWindows.find((candidate) => candidate.id === station.mapZoneId);
+    area.textContent = zone?.label || [station.municipality, station.province].filter(Boolean).join(" · ");
+    const link = makeButtonLink("station-popup-link", "Avvia navigazione", mapsUrl(station));
+    root.append(title, price, area, link);
     return root;
   }
 
@@ -426,68 +532,141 @@
     }
     state.map = L.map("map", {
       zoomControl: false,
+      preferCanvas: false,
       zoomAnimation: !reducedMotion,
       fadeAnimation: !reducedMotion,
       markerZoomAnimation: !reducedMotion
     });
     L.control.zoom({ position: "bottomright" }).addTo(state.map);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
+      detectRetina: false,
+      updateWhenIdle: true,
+      keepBuffer: 3,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(state.map);
     state.stationLayer = L.layerGroup().addTo(state.map);
+
+    if ("ResizeObserver" in window) {
+      state.resizeObserver = new ResizeObserver(() => scheduleMapLayout(false));
+      state.resizeObserver.observe($("#map"));
+    }
   }
 
   function fitRoute() {
     if (!state.map || !state.routeLayer) return;
-    state.map.fitBounds(state.routeLayer.getBounds(), { padding: [34, 34] });
+    state.map.invalidateSize({ pan: false, animate: false });
+    const bounds = state.routeLayer.getBounds();
+    for (const station of mappedStationsForCurrentLeg()) {
+      bounds.extend([station.lat, station.lng]);
+    }
+    state.map.fitBounds(bounds, {
+      paddingTopLeft: [34, 88],
+      paddingBottomRight: [34, 54],
+      animate: false
+    });
   }
 
-  function updateMap(stations = filteredStations()) {
+  function scheduleMapLayout(fit = false) {
+    if (!state.map) return;
+    if (state.mapLayoutFrame) cancelAnimationFrame(state.mapLayoutFrame);
+    state.mapLayoutFrame = requestAnimationFrame(() => {
+      state.mapLayoutFrame = requestAnimationFrame(() => {
+        state.mapLayoutFrame = null;
+        state.map?.invalidateSize({ pan: false, animate: false });
+        if (fit) fitRoute();
+      });
+    });
+  }
+
+  function updateMap({ fit = true } = {}) {
     if (!state.map) return;
     const leg = currentLeg();
+    const stations = mappedStationsForCurrentLeg();
     if (state.routeLayer) state.routeLayer.remove();
     state.stationLayer.clearLayers();
     state.markers.clear();
-    state.routeLayer = L.polyline(leg.route, { color: "#2f6bff", weight: 6, opacity: 0.88 }).addTo(state.map);
+    state.routeLayer = L.polyline(leg.route, {
+      color: "#2f6bff",
+      weight: 6,
+      opacity: 0.92,
+      lineCap: "round",
+      lineJoin: "round"
+    }).addTo(state.map);
     leg.stops.forEach((stop, index) => {
       L.marker([stop.lat, stop.lng], { icon: routeIcon(index) })
         .bindTooltip(stop.name, { direction: "top" })
         .addTo(state.stationLayer);
     });
-    stations.slice(0, 16).forEach((station) => {
-      if (!Number.isFinite(station.lat) || !Number.isFinite(station.lng)) return;
+    stations.forEach((station) => {
       const selected = String(station.id) === String(state.selectedId);
-      const marker = L.marker([station.lat, station.lng], { icon: stationIcon(selected), zIndexOffset: selected ? 1000 : 0 })
+      const marker = L.marker([station.lat, station.lng], {
+        icon: stationIcon(selected),
+        keyboard: true,
+        title: `${station.name || "Distributore GPL"}${Number.isFinite(Number(station.price)) ? ` · ${euro.format(Number(station.price))}/L` : ""}`,
+        zIndexOffset: selected ? 1000 : 0
+      })
         .bindPopup(popupNode(station))
         .addTo(state.stationLayer);
-      marker.on("click", () => selectStation(station, false));
+      marker.on("click", () => selectStation(station, false, { source: "marker" }));
       state.markers.set(String(station.id), marker);
     });
-    fitRoute();
-    setTimeout(() => state.map?.invalidateSize(), 60);
+    scheduleMapLayout(fit);
   }
 
-  function selectStation(station, panToStation) {
+  function revealStationCard(stationId) {
+    const card = $$(".station-card").find((candidate) => candidate.dataset.stationId === String(stationId));
+    card?.scrollIntoView({
+      behavior: reducedMotion ? "auto" : "smooth",
+      block: "center",
+      inline: "nearest"
+    });
+  }
+
+  function focusStationOnMap(station, { pan = true, openPopup = true } = {}) {
+    if (!state.map || !Number.isFinite(station.lat) || !Number.isFinite(station.lng)) return;
+    const marker = state.markers.get(String(station.id));
+    if (pan) {
+      state.map.setView([station.lat, station.lng], Math.max(13, state.map.getZoom()), {
+        animate: !reducedMotion
+      });
+    }
+    if (openPopup) marker?.openPopup();
+  }
+
+  function selectStation(station, panToStation, { source = "card" } = {}) {
+    const targetZone = station.mapZoneId
+      || station.matches?.find((match) => match.legId === currentLeg().id)?.zoneId
+      || state.zoneId;
+    const zoneChanged = targetZone !== state.zoneId;
+    if (zoneChanged) state.zoneId = targetZone;
     state.selectedId = station.id;
+
+    if (zoneChanged) {
+      renderRoute();
+      renderStations({ fitMap: false });
+      setTimeout(() => {
+        focusStationOnMap(station, { pan: true, openPopup: true });
+        if (source === "marker") revealStationCard(station.id);
+      }, 80);
+      return;
+    }
+
+    const selectedStation = state.currentStations.find((candidate) => String(candidate.id) === String(station.id)) || station;
+    renderPrimary(selectedStation, false);
     $$(".station-card").forEach((card) => {
       const selected = card.dataset.stationId === String(station.id);
       card.classList.toggle("is-selected", selected);
       $(".station-select", card)?.setAttribute("aria-pressed", String(selected));
     });
-    for (const candidate of state.currentStations) {
-      const marker = state.markers.get(String(candidate.id));
+    for (const [candidateId, marker] of state.markers) {
       if (!marker) continue;
-      const selected = String(candidate.id) === String(station.id);
+      const selected = candidateId === String(station.id);
       marker.setIcon(stationIcon(selected));
       marker.setZIndexOffset(selected ? 1000 : 0);
     }
-    if (panToStation && state.map && Number.isFinite(station.lat) && Number.isFinite(station.lng)) {
-      state.map.setView([station.lat, station.lng], Math.max(13, state.map.getZoom()), { animate: !reducedMotion });
-      state.markers.get(String(station.id))?.openPopup();
-    } else if (!panToStation) {
-      setTimeout(() => state.markers.get(String(station.id))?.openPopup(), 0);
-    }
+    focusStationOnMap(station, { pan: panToStation, openPopup: true });
+    if (source === "marker") setTimeout(() => revealStationCard(station.id), 40);
   }
 
   function renderAll() {
@@ -514,6 +693,20 @@
       localStorage.setItem("gpl-road-trip-filter", state.filter);
       renderStations();
     }));
+    $("#planning-range-control").addEventListener("input", (event) => {
+      state.planningRangeKm = normalizedPlanningRange(event.target.value);
+      state.selectedId = null;
+      localStorage.setItem("gpl-road-trip-planning-range", String(state.planningRangeKm));
+      renderVehicle();
+      if (currentZone().dynamicTarget) renderStations({ fitMap: false });
+    });
+    $("#petrol-buffer-control").addEventListener("change", (event) => {
+      state.allowPetrol = event.target.checked;
+      state.selectedId = null;
+      localStorage.setItem("gpl-road-trip-allow-petrol", String(state.allowPetrol));
+      renderVehicle();
+      if (currentZone().dynamicTarget) renderStations({ fitMap: false });
+    });
     $("#fit-route-button").addEventListener("click", fitRoute);
     $("#my-location-button").addEventListener("click", () => {
       if (!navigator.geolocation || !state.map) return;
@@ -543,6 +736,12 @@
     const updateConnectionBanner = () => { $("#offline-banner").hidden = navigator.onLine; };
     window.addEventListener("online", updateConnectionBanner);
     window.addEventListener("offline", updateConnectionBanner);
+    window.addEventListener("resize", () => scheduleMapLayout(false), { passive: true });
+    window.addEventListener("orientationchange", () => setTimeout(() => scheduleMapLayout(false), 120));
+    window.addEventListener("pageshow", () => scheduleMapLayout(false));
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) scheduleMapLayout(false);
+    });
     updateConnectionBanner();
 
     const installed = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
@@ -552,6 +751,11 @@
   async function start() {
     try {
       [state.config, state.snapshot] = await Promise.all([loadJson("./data/routes.json"), loadSnapshot()]);
+      state.planningRangeKm = normalizedPlanningRange(localStorage.getItem("gpl-road-trip-planning-range"));
+      const savedPetrol = localStorage.getItem("gpl-road-trip-allow-petrol");
+      state.allowPetrol = savedPetrol === null
+        ? state.config.vehicle.allowPetrolDefault !== false
+        : savedPetrol === "true";
       state.zoneId = currentLeg().fuelWindows[0].id;
       initMap();
       bindEvents();

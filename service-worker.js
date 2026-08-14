@@ -1,4 +1,4 @@
-const VERSION = "gpl-road-trip-v3";
+const VERSION = "gpl-road-trip-v5";
 const SHELL_CACHE = `${VERSION}-shell`;
 const DATA_CACHE = `${VERSION}-data`;
 const MAP_CACHE = `${VERSION}-map`;
@@ -14,10 +14,10 @@ const APP_SHELL = [
   "./data/latest.json",
   "./data/seed.json",
   "./assets/icon.svg",
+  "./assets/leaflet-1.9.4.css",
   "./assets/icon-192.png",
   "./assets/icon-512.png",
   "./assets/apple-touch-icon.png",
-  "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",
   "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
 ];
 
