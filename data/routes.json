@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "vehicle": {
+    "model": "Auto GPL",
+    "declaredRangeKm": 350,
+    "planningRangeKm": 280
+  },
+  "legs": [
+    {
+      "id": "day-1",
+      "day": 1,
+      "label": "GIORNO 1",
+      "title": "Bazzano → Bologna → Perugia",
+      "googleMapsUrl": "https://www.google.com/maps/dir/?api=1&origin=Bazzano%2C+Neviano+degli+Arduini+PR&destination=Perugia%2C+PG&travelmode=driving&waypoints=Aeroporto+Guglielmo+Marconi+di+Bologna&dir_action=navigate",
+      "bounds": [[43.08, 10.15], [44.75, 12.25]],
+      "stops": [
+        { "name": "Bazzano PR", "shortName": "Bazzano", "lat": 44.5705, "lng": 10.3697 },
+        { "name": "Aeroporto di Bologna", "shortName": "Bologna", "lat": 44.5308, "lng": 11.2967, "fuelZone": "bologna" },
+        { "name": "Perugia", "shortName": "Perugia", "lat": 43.1107, "lng": 12.3908, "fuelZone": "perugia" }
+      ],
+      "route": [
+        [44.5705, 10.3697], [44.594, 10.48], [44.638, 10.64], [44.669, 10.82],
+        [44.675, 10.98], [44.616, 11.15], [44.5308, 11.2967], [44.493, 11.342],
+        [44.37, 11.31], [44.19, 11.27], [44.02, 11.34], [43.87, 11.43],
+        [43.77, 11.56], [43.65, 11.74], [43.49, 11.89], [43.32, 12.06],
+        [43.18, 12.27], [43.1107, 12.3908]
+      ],
+      "fuelWindows": [
+        { "id": "bologna", "label": "Bologna aeroporto", "center": [44.5308, 11.2967], "radiusKm": 18, "priority": 1 },
+        { "id": "perugia", "label": "Perugia", "center": [43.1107, 12.3908], "radiusKm": 18, "priority": 2 }
+      ]
+    },
+    {
+      "id": "day-2",
+      "day": 2,
+      "label": "GIORNO 2",
+      "title": "Perugia → Cisternino",
+      "googleMapsUrl": "https://www.google.com/maps/dir/?api=1&origin=Perugia%2C+PG&destination=Cisternino%2C+BR&travelmode=driving&dir_action=navigate",
+      "bounds": [[40.55, 12.0], [43.25, 18.0]],
+      "stops": [
+        { "name": "Perugia", "shortName": "Perugia", "lat": 43.1107, "lng": 12.3908, "fuelZone": "perugia" },
+        { "name": "Sosta GPL intermedia", "shortName": "Intermedia", "lat": 42.35, "lng": 14.16, "fuelZone": "adriatica" },
+        { "name": "Ingresso in Puglia", "shortName": "Puglia", "lat": 41.32, "lng": 15.72, "fuelZone": "puglia" },
+        { "name": "Cisternino", "shortName": "Cisternino", "lat": 40.7436, "lng": 17.4258, "fuelZone": "cisternino" }
+      ],
+      "route": [
+        [43.1107, 12.3908], [43.26, 12.64], [43.39, 12.86], [43.48, 13.07],
+        [43.35, 13.31], [43.17, 13.58], [42.95, 13.75], [42.72, 13.88],
+        [42.47, 14.05], [42.35, 14.16], [42.09, 14.7], [41.83, 15.0],
+        [41.62, 15.36], [41.38, 15.55], [41.13, 15.72], [40.95, 16.23],
+        [40.86, 16.63], [40.82, 17.12], [40.7436, 17.4258]
+      ],
+      "fuelWindows": [
+        { "id": "perugia", "label": "Perugia · pieno prima di partire", "center": [43.1107, 12.3908], "radiusKm": 18, "priority": 0 },
+        { "id": "adriatica", "label": "Marche / Abruzzo", "center": [42.35, 14.16], "radiusKm": 45, "priority": 1 },
+        { "id": "puglia", "label": "Puglia lungo il percorso", "center": [41.32, 16.05], "radiusKm": 48, "priority": 2 },
+        { "id": "cisternino", "label": "Cisternino e Valle d’Itria", "center": [40.7436, 17.4258], "radiusKm": 28, "priority": 3 }
+      ]
+    }
+  ]
+}

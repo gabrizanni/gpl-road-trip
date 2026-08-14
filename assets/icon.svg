@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">GPL Road Trip</title>
+  <desc id="desc">Una G bianca con indicatore di percorso su fondo verde.</desc>
+  <rect width="512" height="512" rx="112" fill="#159a68"/>
+  <path d="M362 137c-29-26-66-40-106-40-88 0-159 71-159 159s71 159 159 159c47 0 88-18 119-50v-119H252v62h57v27c-15 10-33 16-53 16-52 0-95-43-95-95s43-95 95-95c25 0 47 9 65 25l41-49Z" fill="#fff"/>
+  <path d="M377 310c20 0 37 17 37 37 0 27-37 68-37 68s-37-41-37-68c0-20 17-37 37-37Z" fill="#2f6bff" stroke="#fff" stroke-width="12"/>
+  <circle cx="377" cy="347" r="10" fill="#fff"/>
+</svg>

@@ -1,6 +1,6 @@
 # GPL Road Trip
 
-Web app gratuita e installabile per il viaggio **Bazzano (PR) → Aeroporto di Bologna → Perugia → Cisternino** del 16–17 agosto. Mostra il percorso e ordina i distributori GPL usando lo snapshot MIMIT incluso nel sito.
+Web app gratuita e installabile per l’itinerario **Bazzano (PR) → Aeroporto di Bologna → Perugia → Cisternino**. Mostra il percorso e ordina i distributori GPL usando lo snapshot MIMIT incluso nel sito. Il repository pubblico usa soltanto località generiche e non contiene indirizzi privati o date personali.
 
 Non usa ChatGPT, account, server applicativi o chiavi API. Dopo la prima apertura conserva sul dispositivo l’interfaccia, le tappe e l’ultimo elenco GPL scaricato. Google Maps, traffico e cartografia richiedono una connessione.
 
@@ -23,7 +23,7 @@ Il sito è composto solo da file statici, quindi può essere pubblicato anche su
 
 Il browser non interroga direttamente servizi non documentati. La pipeline inclusa scarica periodicamente i CSV ufficiali MIMIT, seleziona GPL e genera `data/latest.json`. GitHub Actions può eseguirla senza un server acceso e pubblicare automaticamente il nuovo snapshot.
 
-Il pulsante **Aggiorna** nell’app scarica l’ultimo snapshot già pubblicato. È opportuno aprire l’app e toccarlo prima della partenza e al mattino del 17 agosto.
+Il pulsante **Aggiorna** nell’app scarica l’ultimo snapshot già pubblicato. È opportuno aprire l’app e toccarlo prima di ciascuna partenza.
 
 I prezzi MIMIT non attestano gli orari di apertura. Prima di deviare, controlla la scheda su Maps o chiama il distributore; durante la guida deve operare il passeggero.
 

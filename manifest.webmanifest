@@ -1,0 +1,24 @@
+{
+  "id": "./",
+  "name": "GPL Road Trip",
+  "short_name": "GPL Trip",
+  "description": "Piano GPL offline per Bazzano, Bologna, Perugia e Cisternino.",
+  "lang": "it",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#f7f8f5",
+  "theme_color": "#f7f8f5",
+  "categories": ["travel", "navigation", "utilities"],
+  "icons": [
+    { "src": "./assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Giorno 1", "short_name": "Giorno 1", "url": "./?day=1" },
+    { "name": "Giorno 2", "short_name": "Giorno 2", "url": "./?day=2" }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "gpl-road-trip",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "PWA statica per le soste GPL Bazzano–Bologna–Perugia–Cisternino.",
+  "scripts": {
+    "update:data": "node scripts/update-data.mjs",
+    "validate:data": "node scripts/validate.mjs",
+    "check": "node --check app.js && node --check service-worker.js && node --check scripts/update-data.mjs && node --check scripts/validate.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7f8f5" />
+    <meta name="description" content="Piano GPL offline per Bazzano, Bologna, Perugia e Cisternino." />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="GPL Trip" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>GPL Road Trip</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIINfQ3ynh3Z9wXwPsvCrdpwlZbMIME86A="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#station-list">Vai ai distributori</a>
+
+    <header class="app-header">
+      <a class="brand" href="#top" aria-label="GPL Road Trip, home">
+        <span class="brand-mark" aria-hidden="true">G</span>
+        <span>GPL Road Trip</span>
+      </a>
+      <div class="trip-date" aria-label="Date del viaggio">
+        <svg class="ui-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 3v3m10-3v3M4.5 9.5h15M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/></svg>
+        <span>Viaggio GPL</span>
+      </div>
+      <div class="header-actions">
+        <button id="refresh-button" class="button button-ghost" type="button" aria-label="Aggiorna i dati GPL" title="Aggiorna i dati GPL">
+          <svg class="ui-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5m9.5-3.5A7 7 0 0 0 6.8 6.2L4 9m16 6-2.8 2.8A7 7 0 0 1 5.5 15.5"/></svg><span class="wide-label">Aggiorna</span>
+        </button>
+        <button id="install-button" class="button button-install" type="button" hidden>
+          <svg class="ui-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 20h14"/></svg> Installa app
+        </button>
+        <button id="help-button" class="icon-button" type="button" aria-label="Istruzioni e informazioni">?</button>
+      </div>
+    </header>
+
+    <main id="top" class="app-shell">
+      <section class="map-pane" aria-label="Mappa del viaggio">
+        <div id="map" role="region" aria-label="Mappa interattiva del percorso e dei distributori GPL"></div>
+        <div id="map-unavailable" class="map-unavailable" hidden>
+          <strong>Mappa non disponibile offline</strong>
+          <span>La lista, il percorso e i pulsanti di navigazione restano utilizzabili.</span>
+        </div>
+
+        <div class="map-toolbar" aria-label="Controlli mappa">
+          <button id="fit-route-button" class="map-tool" type="button" aria-label="Mostra tutto il percorso" title="Mostra tutto il percorso"><svg class="ui-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M8 4H4v4m12-4h4v4M8 20H4v-4m12 4h4v-4M8 8l8 8m0-8-8 8"/></svg></button>
+          <button id="my-location-button" class="map-tool" type="button" aria-label="Mostra la mia posizione" title="Mostra la mia posizione"><svg class="ui-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2"/></svg></button>
+        </div>
+
+        <div class="day-switcher" role="group" aria-label="Giorno del viaggio">
+          <button class="day-tab is-active" type="button" aria-pressed="true" data-day="1">
+            <span>GIORNO 1</span><strong>Bazzano → Perugia</strong>
+          </button>
+          <button class="day-tab" type="button" aria-pressed="false" data-day="2">
+            <span>GIORNO 2</span><strong>Perugia → Cisternino</strong>
+          </button>
+        </div>
+
+        <div class="map-legend" aria-label="Legenda">
+          <span><i class="legend-dot legend-stop"></i>Tappa</span>
+          <span><i class="legend-dot legend-station"></i>GPL</span>
+          <span><i class="legend-line"></i>Percorso indicativo</span>
+        </div>
+      </section>
+
+      <aside class="plan-pane" aria-label="Piano rifornimenti">
+        <div class="panel-top">
+          <div>
+            <p id="leg-label" class="eyebrow">GIORNO 1 · TAPPA 1 DI 2</p>
+            <h1 id="leg-title">Bazzano → Bologna → Perugia</h1>
+          </div>
+          <a id="full-route-link" class="route-link" href="#" target="_blank" rel="noopener noreferrer">
+            Apri percorso <svg class="ui-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M9 5h10v10M19 5 8 16m-3-7v10h10"/></svg>
+          </a>
+        </div>
+
+        <ol id="route-stepper" class="route-stepper" aria-label="Tappe del giorno"></ol>
+
+        <section class="autonomy-card" aria-label="Autonomia del veicolo">
+          <div>
+            <span class="card-label">Autonomia GPL dichiarata</span>
+            <strong><span id="declared-range">350</span> <small>km</small></strong>
+            <span class="range-note">Pianificazione prudente: sosta entro <span id="planning-range">280</span> km</span>
+          </div>
+          <div class="range-ring" role="progressbar" aria-label="Percentuale dell’autonomia usata per pianificare" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80"><span>80%</span></div>
+        </section>
+
+        <section class="recommendation" aria-labelledby="recommendation-title">
+          <div class="recommendation-heading">
+            <div>
+              <p class="eyebrow">PROSSIMO RIFORNIMENTO</p>
+              <h2 id="recommendation-title">Caricamento dati GPL…</h2>
+            </div>
+            <span id="data-status" class="status-chip status-loading" role="status">Aggiornamento</span>
+          </div>
+          <div id="primary-station"></div>
+        </section>
+
+        <div class="filters" aria-label="Filtri distributori">
+          <button class="filter-chip is-active" type="button" data-filter="balanced">Miglior scelta</button>
+          <button class="filter-chip" type="button" data-filter="price">Più economici</button>
+          <button class="filter-chip" type="button" data-filter="distance">Più vicini</button>
+          <button class="filter-chip" type="button" data-filter="fresh">Dati recenti</button>
+        </div>
+
+        <section class="station-section" aria-labelledby="station-list-title">
+          <div class="section-heading">
+            <h2 id="station-list-title">Alternative lungo la tappa</h2>
+            <span id="station-count" role="status" aria-live="polite">0 alternative</span>
+          </div>
+          <div id="station-list" class="station-list"></div>
+        </section>
+
+        <section class="safety-note">
+          <span class="safety-icon" aria-hidden="true">!</span>
+          <div>
+            <strong>Prezzi, non garanzia di apertura</strong>
+            <p>I prezzi iniziali hanno una fonte visibile; gli aggiornamenti automatici usano il MIMIT. Prima di deviare, controlla sempre l’apertura su Maps o chiama.</p>
+          </div>
+        </section>
+
+        <footer class="data-footer">
+          <span id="last-update">Ultimo dato disponibile: caricamento…</span>
+          <a href="https://www.mimit.gov.it/it/open-data/elenco-dataset/carburanti-prezzi-praticati-e-anagrafica-degli-impianti" target="_blank" rel="noopener noreferrer">Aggiornamenti MIMIT · IODL 2.0</a>
+        </footer>
+      </aside>
+    </main>
+
+    <div id="mobile-action-bar" class="mobile-action-bar" hidden>
+      <div>
+        <span>GPL CONSIGLIATO</span>
+        <strong id="mobile-station-name">Distributore</strong>
+        <small id="mobile-station-price">Prezzo n.d.</small>
+      </div>
+      <a id="mobile-navigate-link" class="button button-primary" href="#" target="_blank" rel="noopener noreferrer">Naviga <svg class="ui-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m4 11 16-7-7 16-2-7-7-2Z"/></svg></a>
+    </div>
+
+    <div id="offline-banner" class="offline-banner" role="status" hidden>
+      <strong>Sei offline.</strong> Stai usando l’ultimo piano salvato sul dispositivo.
+    </div>
+
+    <dialog id="help-dialog" class="help-dialog">
+      <form method="dialog">
+        <button class="dialog-close" aria-label="Chiudi">×</button>
+        <p class="eyebrow">COME USARLA</p>
+        <h2>Una web app, nessun account</h2>
+        <div class="help-grid">
+          <article>
+            <strong>Android</strong>
+            <p>Apri il sito in Chrome, tocca “Installa app” oppure il menu ⋮ → “Aggiungi a schermata Home”.</p>
+          </article>
+          <article>
+            <strong>iPhone</strong>
+            <p>Apri in Safari, tocca Condividi ⎙ → “Aggiungi alla schermata Home”.</p>
+          </article>
+          <article>
+            <strong>Durante il viaggio</strong>
+            <p>Il passeggero sceglie un distributore e tocca “Naviga”. Google Maps calcola deviazione e traffico reali.</p>
+          </article>
+          <article>
+            <strong>Senza rete</strong>
+            <p>L’ultimo elenco scaricato resta disponibile. La cartografia potrebbe non apparire, ma indirizzi e navigazione restano salvati.</p>
+          </article>
+        </div>
+        <div class="dialog-actions">
+          <button class="button button-primary" value="close">Ho capito</button>
+        </div>
+      </form>
+    </dialog>
+
+    <template id="station-card-template">
+      <article class="station-card">
+        <button class="station-select" type="button">
+          <span class="station-rank"></span>
+          <span class="station-copy">
+            <strong class="station-name"></strong>
+            <span class="station-address"></span>
+            <span class="station-meta"></span>
+          </span>
+          <span class="station-price"></span>
+        </button>
+        <div class="station-actions">
+          <a class="button button-secondary station-details" target="_blank" rel="noopener noreferrer">Scheda MIMIT</a>
+          <a class="button button-primary station-navigate" target="_blank" rel="noopener noreferrer">Naviga</a>
+        </div>
+      </article>
+    </template>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <script src="./app.js" defer></script>
+  </body>
+</html>

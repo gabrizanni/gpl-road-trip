@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-14T00:30:00+02:00",
+  "sourceUpdatedAt": "2026-08-13T22:00:00+02:00",
+  "mode": "curated-seed",
+  "fuel": "GPL",
+  "unit": "EUR/L",
+  "source": {
+    "name": "Selezione iniziale verificata; aggiornamenti automatici da MIMIT",
+    "license": "Fonti indicate nelle singole schede",
+    "datasetPage": "https://www.mimit.gov.it/it/open-data/elenco-dataset/carburanti-prezzi-praticati-e-anagrafica-degli-impianti"
+  },
+  "stations": [
+    {
+      "id": "seed-q8-cantagallo-ovest",
+      "name": "Q8 Cantagallo Ovest",
+      "brand": "Q8",
+      "address": "A1 Milano–Napoli km 199, direzione Napoli",
+      "municipality": "Casalecchio di Reno",
+      "province": "BO",
+      "lat": 44.45522,
+      "lng": 11.28039,
+      "fuel": "GPL",
+      "price": 0.809,
+      "isSelf": false,
+      "communicatedAt": "2026-08-13T12:00:00+02:00",
+      "openingHours": "domenica 06:00–22:00; GPL servito",
+      "detailsUrl": "https://www.prezzibenzina.it/distributori/1099-q8-cantagallo-ovest",
+      "matches": [
+        { "legId": "day-1", "zoneId": "bologna", "zoneDistanceKm": 8.5, "routeDistanceKm": 0.5, "progressKm": 133, "score": 0.1, "priority": 0 }
+      ]
+    },
+    {
+      "id": "seed-ip-balanzano",
+      "name": "IP Balanzano 24 Ore",
+      "brand": "IP",
+      "address": "Via Gustavo Benucci 238",
+      "municipality": "Perugia",
+      "province": "PG",
+      "lat": 43.07525,
+      "lng": 12.42949,
+      "fuel": "GPL",
+      "price": 0.769,
+      "isSelf": false,
+      "communicatedAt": "2026-08-09T12:00:00+02:00",
+      "openingHours": "indicato 24h; verificare la presenza dell’addetto GPL",
+      "detailsUrl": "https://www.prezzibenzina.it/distributori/31820-ip-balanzano-via-benucci",
+      "matches": [
+        { "legId": "day-1", "zoneId": "perugia", "zoneDistanceKm": 5.0, "routeDistanceKm": 2.0, "progressKm": 377, "score": 0.1, "priority": 0 },
+        { "legId": "day-2", "zoneId": "perugia", "zoneDistanceKm": 5.0, "routeDistanceKm": 2.0, "progressKm": 5, "score": 0.1, "priority": 0 }
+      ]
+    },
+    {
+      "id": "seed-francavilla",
+      "name": "Gasoline Station Francavilla",
+      "brand": "Gasoline Station",
+      "address": "Strada San Leonardo",
+      "municipality": "Francavilla al Mare",
+      "province": "CH",
+      "lat": 42.42168,
+      "lng": 14.2731,
+      "fuel": "GPL",
+      "price": 0.789,
+      "isSelf": false,
+      "communicatedAt": "2026-08-13T12:00:00+02:00",
+      "openingHours": "tutti i giorni 06:30–21:40",
+      "detailsUrl": "https://www.prezzibenzina.it/distributori/11240-gasoline-station-francavilla-al-mare-strada-san-leonardo",
+      "matches": [
+        { "legId": "day-2", "zoneId": "adriatica", "zoneDistanceKm": 12.2, "routeDistanceKm": 5.0, "progressKm": 255, "score": 0.1, "priority": 0 }
+      ]
+    },
+    {
+      "id": "seed-torre-cerrano-ovest",
+      "name": "Esso Torre Cerrano Ovest",
+      "brand": "Esso",
+      "address": "A14, direzione sud",
+      "municipality": "Pineto",
+      "province": "TE",
+      "lat": 42.53052,
+      "lng": 14.12511,
+      "fuel": "GPL",
+      "price": 0.949,
+      "isSelf": false,
+      "communicatedAt": "2026-08-12T12:00:00+02:00",
+      "openingHours": "area di servizio 24h; verificare l’addetto GPL",
+      "detailsUrl": "https://www.prezzibenzina.it/distributori/14082-esso-torre-cerrano-ovest",
+      "matches": [
+        { "legId": "day-2", "zoneId": "adriatica", "zoneDistanceKm": 20.3, "routeDistanceKm": 0.2, "progressKm": 230, "score": 0.9, "priority": 1 }
+      ]
+    },
+    {
+      "id": "seed-fucci-fuel-3",
+      "name": "Fucci Fuel 3",
+      "brand": "Fucci Fuel",
+      "address": "SS16 bis dir. Bari km 748+700",
+      "municipality": "Barletta",
+      "province": "BT",
+      "lat": 41.30291,
+      "lng": 16.30747,
+      "fuel": "GPL",
+      "price": 0.659,
+      "isSelf": false,
+      "communicatedAt": "2026-08-13T12:00:00+02:00",
+      "openingHours": "indicato 24h; verificare l’addetto GPL",
+      "detailsUrl": "https://www.prezzibenzina.it/distributori/32522-fucci-fuel-barletta",
+      "matches": [
+        { "legId": "day-2", "zoneId": "puglia", "zoneDistanceKm": 21.6, "routeDistanceKm": 5.0, "progressKm": 475, "score": 0.1, "priority": 0 }
+      ]
+    },
+    {
+      "id": "seed-le-saline-ovest",
+      "name": "SarniOil Le Saline Ovest",
+      "brand": "SarniOil",
+      "address": "A14, direzione sud",
+      "municipality": "Cerignola",
+      "province": "FG",
+      "lat": 41.32857,
+      "lng": 15.87655,
+      "fuel": "GPL",
+      "price": 0.898,
+      "isSelf": false,
+      "communicatedAt": "2026-08-13T12:00:00+02:00",
+      "openingHours": "area autostradale; verificare il servizio GPL",
+      "detailsUrl": "https://www.verbrauchsrechner.de/spritpreise/tankstelle/sarnioil_le_saline_ovest_71042_cerignola_45545/",
+      "matches": [
+        { "legId": "day-2", "zoneId": "puglia", "zoneDistanceKm": 14.5, "routeDistanceKm": 0.2, "progressKm": 445, "score": 0.7, "priority": 1 }
+      ]
+    },
+    {
+      "id": "seed-aerre-foggia",
+      "name": "Aerre Petroli Foggia",
+      "brand": "Aerre Petroli",
+      "address": "SS16 km 684",
+      "municipality": "Foggia",
+      "province": "FG",
+      "lat": 41.42787,
+      "lng": 15.57666,
+      "fuel": "GPL",
+      "price": 0.669,
+      "isSelf": false,
+      "communicatedAt": "2026-08-08T12:00:00+02:00",
+      "openingHours": "05:00–21:00",
+      "detailsUrl": "https://www.prezzibenzina.it/distributori/14403-aerre-petroli-foggia",
+      "matches": [
+        { "legId": "day-2", "zoneId": "puglia", "zoneDistanceKm": 41.3, "routeDistanceKm": 10.0, "progressKm": 420, "score": 0.4, "priority": 2 }
+      ]
+    },
+    {
+      "id": "seed-eni-fasano",
+      "name": "ENI Fasano",
+      "brand": "ENI",
+      "address": "SS172 dir. km 8,800",
+      "municipality": "Fasano",
+      "province": "BR",
+      "lat": 40.82501,
+      "lng": 17.34873,
+      "fuel": "GPL",
+      "price": 0.759,
+      "isSelf": false,
+      "communicatedAt": "2026-08-13T12:00:00+02:00",
+      "openingHours": "05:00–21:00",
+      "detailsUrl": "https://www.prezzibenzina.it/distributori/15505-eni-fasano-ss172dir-km-8-800",
+      "matches": [
+        { "legId": "day-2", "zoneId": "cisternino", "zoneDistanceKm": 11.1, "routeDistanceKm": 4.0, "progressKm": 610, "score": 0.1, "priority": 0 }
+      ]
+    },
+    {
+      "id": "seed-ip-cisternino",
+      "name": "IP Cisternino",
+      "brand": "IP",
+      "address": "SP Gravina di Castro 18",
+      "municipality": "Cisternino",
+      "province": "BR",
+      "lat": 40.7619,
+      "lng": 17.4229,
+      "fuel": "GPL",
+      "price": 0.787,
+      "isSelf": false,
+      "communicatedAt": "2026-08-12T12:00:00+02:00",
+      "openingHours": "lun–sab 07:00–12:30 e 15:30–20:00",
+      "detailsUrl": "https://prix-carburant.eu/it/station/33770",
+      "matches": [
+        { "legId": "day-2", "zoneId": "cisternino", "zoneDistanceKm": 2.0, "routeDistanceKm": 1.0, "progressKm": 625, "score": 0.2, "priority": 1 }
+      ]
+    }
+  ]
+}

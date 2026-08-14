@@ -1,0 +1,76 @@
+name: Aggiorna dati GPL e pubblica il sito
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Dopo l'aggiornamento delle 08:00 italiane del dataset MIMIT.
+    - cron: "30 8 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica il repository
+        uses: actions/checkout@v4
+
+      - name: Prepara Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Aggiorna lo snapshot MIMIT
+        shell: bash
+        run: |
+          if ! npm run update:data; then
+            echo "Download MIMIT non riuscito: mantengo l'ultimo snapshot valido."
+          fi
+
+      - name: Controlla gli script
+        run: npm run check
+
+      - name: Valida lo snapshot
+        run: npm run validate:data
+
+      - name: Salva nel repository il nuovo snapshot
+        if: github.event_name != 'push'
+        shell: bash
+        run: |
+          if git diff --quiet -- data/latest.json; then
+            echo "Nessuna variazione nei dati."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/latest.json
+          git commit -m "data: aggiorna prezzi GPL MIMIT"
+          git push
+
+      - name: Configura GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Prepara l'artefatto statico
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: prepare
+    steps:
+      - name: Pubblica su GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
