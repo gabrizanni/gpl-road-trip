@@ -65,7 +65,7 @@
         <div class="map-legend" aria-label="Legenda">
           <span><i class="legend-dot legend-stop"></i>Tappa</span>
           <span><i class="legend-dot legend-station"></i>GPL</span>
-          <span><i class="legend-line"></i>Percorso indicativo</span>
+          <span><i class="legend-line"></i>Percorso stradale</span>
         </div>
       </section>
 
@@ -82,7 +82,7 @@
 
         <ol id="route-stepper" class="route-stepper" aria-label="Tappe del giorno"></ol>
 
-        <section class="autonomy-card" aria-label="Autonomia del veicolo">
+        <section id="autonomy-card" class="autonomy-card" aria-label="Scegli quando fare la sosta GPL">
           <div class="autonomy-copy">
             <span class="card-label">Target prossima sosta GPL</span>
             <strong><output id="planning-range" for="planning-range-control">310</output> <small>km</small></strong>
@@ -95,7 +95,7 @@
               <input id="petrol-buffer-control" type="checkbox" checked />
               <span>Posso usare un po’ di benzina <small>+40 km di margine</small></span>
             </label>
-            <span class="range-note">Autonomia GPL dichiarata: <span id="declared-range">350</span> km · benzina come margine</span>
+            <span class="range-note">Spostando il cursore cambia il distributore consigliato · autonomia dichiarata: <span id="declared-range">350</span> km</span>
           </div>
           <div class="range-ring" role="progressbar" aria-label="Percentuale dell’autonomia usata per pianificare" aria-valuemin="0" aria-valuemax="100" aria-valuenow="89"><span>89%</span></div>
         </section>

@@ -15,6 +15,11 @@ const SOURCES = {
   prices: "https://www.mimit.gov.it/images/exportCSV/prezzo_alle_8.csv",
 };
 
+const ROUTING_ENDPOINTS = [
+  "https://routing.openstreetmap.de/routed-car/route/v1/driving",
+  "https://router.project-osrm.org/route/v1/driving",
+];
+
 const USER_AGENT =
   "GPL-Road-Trip/1.0 (+https://github.com/; daily public-data snapshot)";
 const MAX_PER_WINDOW = 12;
@@ -47,6 +52,74 @@ async function fetchText(url, attempts = 4) {
     }
   }
   throw new Error(`Download fallito per ${url}: ${lastError?.message}`);
+}
+
+function validRoute(route) {
+  return (
+    Array.isArray(route) &&
+    route.length > 2 &&
+    route.every(
+      (point) =>
+        Array.isArray(point) &&
+        point.length >= 2 &&
+        Number.isFinite(Number(point[0])) &&
+        Number.isFinite(Number(point[1])),
+    )
+  );
+}
+
+async function fetchFastestRoadRoute(leg) {
+  const waypoints = validRoute(leg.routingWaypoints)
+    ? leg.routingWaypoints
+    : leg.stops.map((stop) => [stop.lat, stop.lng]);
+  const coordinates = waypoints
+    .map(([lat, lng]) => `${lng},${lat}`)
+    .join(";");
+  let lastError;
+
+  for (const endpoint of ROUTING_ENDPOINTS) {
+    try {
+      const response = await fetch(
+        `${endpoint}/${coordinates}?overview=full&geometries=geojson&steps=false&continue_straight=true`,
+        {
+          headers: { accept: "application/json", "user-agent": USER_AGENT },
+          signal: AbortSignal.timeout(30_000),
+        },
+      );
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const payload = await response.json();
+      const route = payload?.routes?.[0];
+      const geometry = route?.geometry?.coordinates?.map(([lng, lat]) => [lat, lng]);
+      if (!validRoute(geometry)) throw new Error("geometria stradale non valida");
+      return {
+        route: geometry,
+        distanceKm: Number((Number(route.distance) / 1000).toFixed(1)),
+        durationMinutes: Number((Number(route.duration) / 60).toFixed(0)),
+        source: "OSRM/OpenStreetMap",
+      };
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  throw new Error(lastError?.message || "servizio di routing non disponibile");
+}
+
+async function hydrateRoadRoutes(routes) {
+  await Promise.all(
+    routes.legs.map(async (leg) => {
+      try {
+        const roadRoute = await fetchFastestRoadRoute(leg);
+        leg.route = roadRoute.route;
+        leg.distanceScale = 1;
+        leg.roadRoute = roadRoute;
+      } catch (error) {
+        console.warn(
+          `Routing ${leg.id} non aggiornato: ${error.message}. Uso la traccia autostradale inclusa.`,
+        );
+      }
+    }),
+  );
 }
 
 function splitCsvLine(line, delimiter) {
@@ -247,13 +320,13 @@ function normalize(value, minimum, maximum) {
   return (value - minimum) / (maximum - minimum);
 }
 
-function rankWindow(candidates, now) {
+function rankWindow(candidates, now, targets = []) {
   if (!candidates.length) return [];
   const prices = candidates.map((candidate) => candidate.station.price);
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
 
-  return candidates
+  const ranked = candidates
     .map((candidate) => {
       const { match, station } = candidate;
       const score =
@@ -271,8 +344,42 @@ function rankWindow(candidates, now) {
         a.match.score - b.match.score ||
         a.station.price - b.station.price ||
         a.match.zoneDistanceKm - b.match.zoneDistanceKm,
-    )
-    .slice(0, MAX_PER_WINDOW);
+    );
+
+  if (!targets.length) return ranked.slice(0, MAX_PER_WINDOW);
+
+  const selected = [];
+  const selectedIds = new Set();
+  for (const target of targets) {
+    const closest = [...ranked]
+      .filter((candidate) => !selectedIds.has(candidate.station.id))
+      .sort(
+        (a, b) =>
+          Math.abs(a.match.progressKm - target) -
+            Math.abs(b.match.progressKm - target) ||
+          a.match.score - b.match.score,
+      )[0];
+    if (closest) {
+      selected.push(closest);
+      selectedIds.add(closest.station.id);
+    }
+  }
+  for (const candidate of ranked) {
+    if (selected.length >= MAX_PER_WINDOW) break;
+    if (selectedIds.has(candidate.station.id)) continue;
+    selected.push(candidate);
+    selectedIds.add(candidate.station.id);
+  }
+  return selected;
+}
+
+function planningTargets(vehicle) {
+  const minimum = Number(vehicle?.planningRangeMinKm) || 300;
+  const maximum = Number(vehicle?.planningRangeMaxKm) || 320;
+  const step = Math.max(1, Number(vehicle?.planningRangeStepKm) || 10);
+  const targets = [];
+  for (let target = minimum; target <= maximum; target += step) targets.push(target);
+  return targets;
 }
 
 function buildStations(registryRows, priceRows, routes, now) {
@@ -324,6 +431,7 @@ function buildStations(registryRows, priceRows, routes, now) {
     ...price,
   }));
   const selected = new Map();
+  const rangeTargets = planningTargets(routes.vehicle);
 
   for (const leg of routes.legs) {
     for (const window of leg.fuelWindows) {
@@ -352,7 +460,11 @@ function buildStations(registryRows, priceRows, routes, now) {
         });
       }
 
-      for (const candidate of rankWindow(candidates, now)) {
+      for (const candidate of rankWindow(
+        candidates,
+        now,
+        window.dynamicTarget ? rangeTargets : [],
+      )) {
         const existing = selected.get(candidate.station.id);
         if (existing) {
           existing.matches.push(candidate.match);
@@ -382,6 +494,7 @@ function buildStations(registryRows, priceRows, routes, now) {
 async function main() {
   const now = new Date();
   const routes = JSON.parse(await readFile(ROUTES_PATH, "utf8"));
+  await hydrateRoadRoutes(routes);
   const [registryText, pricesText] = await Promise.all([
     fetchText(SOURCES.registry),
     fetchText(SOURCES.prices),
@@ -437,6 +550,11 @@ async function main() {
       maximumPerWindow: MAX_PER_WINDOW,
       countsByZone,
     },
+    roadRoutes: Object.fromEntries(
+      routes.legs
+        .filter((leg) => leg.roadRoute)
+        .map((leg) => [leg.id, leg.roadRoute]),
+    ),
     stations,
   };
 

@@ -16,6 +16,14 @@
       "day": 1,
       "label": "GIORNO 1",
       "title": "Bazzano → Aeroporto → GPL → Perugia",
+      "defaultFuelZone": "bologna",
+      "routingCacheVersion": 2,
+      "routingWaypoints": [
+        [44.5705, 10.3697],
+        [44.5308, 11.2967],
+        [44.45522, 11.28039],
+        [43.1107, 12.3908]
+      ],
       "googleMapsUrl": "https://www.google.com/maps/dir/?api=1&origin=Bazzano%2C+Neviano+degli+Arduini+PR&destination=Perugia%2C+PG&travelmode=driving&waypoints=Aeroporto+Guglielmo+Marconi+di+Bologna%7CQ8+Cantagallo+Ovest%2C+Casalecchio+di+Reno&dir_action=navigate",
       "bounds": [[43.08, 10.15], [44.75, 12.25]],
       "stops": [
@@ -25,11 +33,14 @@
         { "name": "Perugia", "shortName": "Perugia", "lat": 43.1107, "lng": 12.3908, "fuelZone": "perugia" }
       ],
       "route": [
-        [44.5705, 10.3697], [44.594, 10.48], [44.638, 10.64], [44.669, 10.82],
-        [44.675, 10.98], [44.616, 11.15], [44.5308, 11.2967], [44.493, 11.342],
-        [44.45522, 11.28039], [44.37, 11.31], [44.19, 11.27], [44.02, 11.34], [43.87, 11.43],
-        [43.77, 11.56], [43.65, 11.74], [43.49, 11.89], [43.32, 12.06],
-        [43.18, 12.27], [43.1107, 12.3908]
+        [44.5705, 10.3697], [44.63, 10.39], [44.70, 10.34], [44.78, 10.31],
+        [44.84, 10.31], [44.80, 10.48], [44.74, 10.65], [44.70, 10.82],
+        [44.68, 10.98], [44.64, 11.12], [44.57, 11.24], [44.5308, 11.2967],
+        [44.50, 11.32], [44.45522, 11.28039], [44.38, 11.22], [44.25, 11.18],
+        [44.10, 11.19], [44.00, 11.23], [43.88, 11.18], [43.79, 11.18],
+        [43.72, 11.29], [43.63, 11.43], [43.55, 11.58], [43.46, 11.73],
+        [43.37, 11.77], [43.25, 11.82], [43.21, 11.87], [43.20, 12.05],
+        [43.15, 12.23], [43.1107, 12.3908]
       ],
       "fuelWindows": [
         { "id": "bologna", "label": "Dopo l’aeroporto · Bologna", "center": [44.45522, 11.28039], "radiusKm": 18, "minProgressKm": 85, "priority": 1 },
@@ -40,9 +51,15 @@
       "id": "day-2",
       "day": 2,
       "label": "GIORNO 2",
-      "title": "Perugia → Cisternino",
-      "distanceScale": 1.11,
-      "googleMapsUrl": "https://www.google.com/maps/dir/?api=1&origin=Perugia%2C+PG&destination=Cisternino%2C+BR&travelmode=driving&dir_action=navigate",
+      "title": "Perugia → SS77 → A14 → Cisternino",
+      "defaultFuelZone": "adriatica",
+      "routingCacheVersion": 2,
+      "routingWaypoints": [
+        [43.1107, 12.3908],
+        [43.3005, 13.7207],
+        [40.7436, 17.4258]
+      ],
+      "googleMapsUrl": "https://www.google.com/maps/dir/?api=1&origin=Perugia%2C+PG&destination=Cisternino%2C+BR&travelmode=driving&waypoints=Civitanova+Marche%2C+MC&dir_action=navigate",
       "bounds": [[40.55, 12.0], [43.25, 18.0]],
       "stops": [
         { "name": "Perugia", "shortName": "Perugia", "lat": 43.1107, "lng": 12.3908, "fuelZone": "perugia" },
@@ -51,11 +68,14 @@
         { "name": "Cisternino", "shortName": "Cisternino", "lat": 40.7436, "lng": 17.4258, "fuelZone": "cisternino" }
       ],
       "route": [
-        [43.1107, 12.3908], [43.26, 12.64], [43.39, 12.86], [43.48, 13.07],
-        [43.35, 13.31], [43.17, 13.58], [42.95, 13.75], [42.72, 13.88],
-        [42.47, 14.05], [42.35, 14.16], [42.09, 14.7], [41.83, 15.0],
-        [41.62, 15.36], [41.38, 15.55], [41.13, 15.72], [40.95, 16.23],
-        [40.86, 16.63], [40.82, 17.12], [40.7436, 17.4258]
+        [43.1107, 12.3908], [43.07, 12.56], [42.95, 12.70], [43.00, 12.84],
+        [43.03, 12.99], [43.10, 13.12], [43.17, 13.23], [43.24, 13.42],
+        [43.29, 13.59], [43.3005, 13.7207], [43.20, 13.78], [43.08, 13.82],
+        [42.95, 13.88], [42.82, 13.92], [42.69, 14.01], [42.55, 14.10],
+        [42.44, 14.18], [42.32, 14.32], [42.20, 14.49], [42.09, 14.70],
+        [41.98, 14.96], [41.88, 15.28], [41.72, 15.38], [41.52, 15.61],
+        [41.33, 15.84], [41.20, 16.05], [41.23, 16.32], [41.16, 16.62],
+        [41.07, 16.91], [40.95, 17.21], [40.84, 17.34], [40.7436, 17.4258]
       ],
       "fuelWindows": [
         { "id": "perugia", "label": "Perugia · pieno prima di partire", "center": [43.1107, 12.3908], "radiusKm": 18, "priority": 0 },

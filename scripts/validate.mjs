@@ -31,6 +31,15 @@ assert(snapshot.stations?.length > 0, "lo snapshot non può essere vuoto");
 const legZones = new Map(
   routes.legs.map((leg) => [leg.id, new Set(leg.fuelWindows.map((zone) => zone.id))]),
 );
+for (const leg of routes.legs) {
+  const zoneIds = legZones.get(leg.id);
+  assert(zoneIds?.has(leg.defaultFuelZone), `${leg.id}: defaultFuelZone non valida`);
+  assert(Array.isArray(leg.route) && leg.route.length > 10, `${leg.id}: traccia stradale troppo corta`);
+  assert(
+    Array.isArray(leg.routingWaypoints) && leg.routingWaypoints.length >= 3,
+    `${leg.id}: waypoints del routing mancanti`,
+  );
+}
 const expectedWindows = routes.legs.flatMap((leg) =>
   leg.fuelWindows.map((zone) => `${leg.id}/${zone.id}`),
 );
@@ -39,10 +48,15 @@ assert(vehicle.planningRangeKm >= 300 && vehicle.planningRangeKm <= 320, "il tar
 assert(vehicle.planningRangeMinKm === 300, "il selettore GPL deve partire da 300 km");
 assert(vehicle.planningRangeMaxKm === 320, "il selettore GPL deve arrivare a 320 km");
 const dayOne = routes.legs.find((leg) => leg.id === "day-1");
+const dayTwo = routes.legs.find((leg) => leg.id === "day-2");
 const airportIndex = dayOne?.stops.findIndex((stop) => /aeroporto/i.test(stop.name)) ?? -1;
 const bolognaFuelIndex = dayOne?.stops.findIndex((stop) => stop.fuelZone === "bologna") ?? -1;
 assert(airportIndex >= 0 && !dayOne.stops[airportIndex]?.fuelZone, "l’aeroporto deve essere una tappa senza rifornimento");
 assert(bolognaFuelIndex > airportIndex, "il rifornimento GPL di Bologna deve seguire l’aeroporto");
+assert(
+  dayTwo?.fuelWindows.find((zone) => zone.id === dayTwo.defaultFuelZone)?.dynamicTarget,
+  "il Giorno 2 deve aprirsi sulla sosta regolata dal selettore",
+);
 const seenWindows = new Set();
 const ids = new Set();
 
@@ -80,6 +94,27 @@ for (const [index, station] of (snapshot.stations || []).entries()) {
 for (const window of expectedWindows) {
   assert(seenWindows.has(window), `nessun candidato GPL per ${window}`);
 }
+
+const dynamicCandidates = (snapshot.stations || []).flatMap((station) =>
+  (station.matches || [])
+    .filter((match) => match.legId === "day-2" && match.zoneId === dayTwo?.defaultFuelZone)
+    .map((match) => ({ id: station.id, progressKm: match.progressKm })),
+);
+const recommendedIds = new Set();
+for (
+  let target = vehicle.planningRangeMinKm;
+  target <= vehicle.planningRangeMaxKm;
+  target += vehicle.planningRangeStepKm
+) {
+  const closest = [...dynamicCandidates].sort(
+    (a, b) => Math.abs(a.progressKm - target) - Math.abs(b.progressKm - target),
+  )[0];
+  if (closest) recommendedIds.add(String(closest.id));
+}
+assert(
+  recommendedIds.size >= 2,
+  "il selettore 300–320 km deve produrre almeno due raccomandazioni differenti",
+);
 
 if (errors.length) {
   console.error(`Validazione fallita (${errors.length} errori):`);

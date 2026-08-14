@@ -1,4 +1,4 @@
-const VERSION = "gpl-road-trip-v5";
+const VERSION = "gpl-road-trip-v6";
 const SHELL_CACHE = `${VERSION}-shell`;
 const DATA_CACHE = `${VERSION}-data`;
 const MAP_CACHE = `${VERSION}-map`;

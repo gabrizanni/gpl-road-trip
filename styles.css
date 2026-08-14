@@ -544,6 +544,8 @@ button.step-name:focus-visible {
   box-shadow: 0 16px 34px rgba(16, 35, 29, 0.16);
 }
 
+.autonomy-card[hidden] { display: none; }
+
 .autonomy-copy {
   min-width: 0;
   flex: 1;

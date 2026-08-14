@@ -89,6 +89,44 @@
       ]
     },
     {
+      "id": "seed-tamoil-trigno-ovest",
+      "name": "Tamoil Trigno Ovest",
+      "brand": "Tamoil",
+      "address": "A14 km 458.600, direzione sud",
+      "municipality": "Montenero di Bisaccia",
+      "province": "CB",
+      "lat": 42.047038,
+      "lng": 14.812735,
+      "fuel": "GPL",
+      "price": 0.899,
+      "isSelf": false,
+      "communicatedAt": "2026-08-14T08:36:00+02:00",
+      "openingHours": "06:00–22:00; festivi non presidiato",
+      "detailsUrl": "https://www.prezzibenzina.it/distributori/14523-tamoil-trigno-ovest-corsia-auto",
+      "matches": [
+        { "legId": "day-2", "zoneId": "adriatica", "zoneDistanceKm": 10.5, "routeDistanceKm": 0.5, "progressKm": 296.9, "score": 0.2, "priority": 0 }
+      ]
+    },
+    {
+      "id": "seed-q8-termoli",
+      "name": "Q8 Termoli c/o Hotel Europa",
+      "brand": "Q8",
+      "address": "SS87 km 219.000",
+      "municipality": "Termoli",
+      "province": "CB",
+      "lat": 41.959295,
+      "lng": 14.993363,
+      "fuel": "GPL",
+      "price": 0.759,
+      "isSelf": false,
+      "communicatedAt": "2026-08-12T08:12:00+02:00",
+      "openingHours": "06:30–21:00; 15 agosto orario normale",
+      "detailsUrl": "https://www.prezzibenzina.it/distributori/30546-q8-termoli-c-o-hotel-europa",
+      "matches": [
+        { "legId": "day-2", "zoneId": "adriatica", "zoneDistanceKm": 28.3, "routeDistanceKm": 1.1, "progressKm": 314.6, "score": 0.1, "priority": 0 }
+      ]
+    },
+    {
       "id": "seed-fucci-fuel-3",
       "name": "Fucci Fuel 3",
       "brand": "Fucci Fuel",

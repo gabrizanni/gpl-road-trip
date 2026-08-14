@@ -28,6 +28,7 @@
     markers: new Map(),
     resizeObserver: null,
     mapLayoutFrame: null,
+    routeRequests: new Map(),
     installPrompt: null,
     currentStations: []
   };
@@ -39,6 +40,104 @@
   function currentZone() {
     const leg = currentLeg();
     return leg.fuelWindows.find((zone) => zone.id === state.zoneId) || leg.fuelWindows[0];
+  }
+
+  function defaultZone(leg = currentLeg()) {
+    return leg.fuelWindows.find((zone) => zone.id === leg.defaultFuelZone)
+      || leg.fuelWindows.find((zone) => zone.dynamicTarget)
+      || leg.fuelWindows[0];
+  }
+
+  function dynamicZone(leg = currentLeg()) {
+    return leg.fuelWindows.find((zone) => zone.dynamicTarget) || null;
+  }
+
+  function validRoute(route) {
+    return Array.isArray(route)
+      && route.length > 2
+      && route.every((point) => Array.isArray(point)
+        && point.length >= 2
+        && Number.isFinite(Number(point[0]))
+        && Number.isFinite(Number(point[1])));
+  }
+
+  function routeCoordinates(leg) {
+    const snapshotRoute = state.snapshot?.roadRoutes?.[leg.id]?.route;
+    if (validRoute(snapshotRoute)) return snapshotRoute;
+    if (validRoute(leg.roadRoute)) return leg.roadRoute;
+    return leg.route;
+  }
+
+  function routeCacheKey(leg) {
+    return `gpl-road-trip-road-route-${leg.id}-v${leg.routingCacheVersion || 1}`;
+  }
+
+  async function fetchWithTimeout(url, timeoutMs = 12_000) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      return await fetch(url, {
+        headers: { accept: "application/json" },
+        signal: controller.signal
+      });
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+
+  async function ensureRoadRoute(leg = currentLeg()) {
+    if (validRoute(state.snapshot?.roadRoutes?.[leg.id]?.route) || validRoute(leg.roadRoute)) return;
+
+    try {
+      const cached = JSON.parse(localStorage.getItem(routeCacheKey(leg)) || "null");
+      if (validRoute(cached?.route)) {
+        leg.roadRoute = cached.route;
+        if (currentLeg().id === leg.id) updateMap({ fit: true });
+        return;
+      }
+    } catch {
+      localStorage.removeItem(routeCacheKey(leg));
+    }
+
+    if (state.routeRequests.has(leg.id)) return state.routeRequests.get(leg.id);
+    const waypoints = validRoute(leg.routingWaypoints) ? leg.routingWaypoints : leg.stops.map((stop) => [stop.lat, stop.lng]);
+    const coordinates = waypoints.map(([lat, lng]) => `${lng},${lat}`).join(";");
+    const endpoints = [
+      "https://routing.openstreetmap.de/routed-car/route/v1/driving",
+      "https://router.project-osrm.org/route/v1/driving"
+    ];
+
+    const request = (async () => {
+      for (const endpoint of endpoints) {
+        try {
+          const response = await fetchWithTimeout(
+            `${endpoint}/${coordinates}?overview=full&geometries=geojson&steps=false&continue_straight=true`
+          );
+          if (!response.ok) continue;
+          const payload = await response.json();
+          const geometry = payload?.routes?.[0]?.geometry?.coordinates
+            ?.map(([lng, lat]) => [lat, lng]);
+          if (!validRoute(geometry)) continue;
+          leg.roadRoute = geometry;
+          try {
+            localStorage.setItem(routeCacheKey(leg), JSON.stringify({
+              route: geometry,
+              distanceKm: Number(payload.routes[0].distance) / 1000,
+              cachedAt: new Date().toISOString()
+            }));
+          } catch {
+            // La traccia resta disponibile per la sessione anche senza spazio locale.
+          }
+          if (currentLeg().id === leg.id) updateMap({ fit: true });
+          return;
+        } catch {
+          // Prova il secondo motore; la traccia autostradale inclusa resta il fallback offline.
+        }
+      }
+    })().finally(() => state.routeRequests.delete(leg.id));
+
+    state.routeRequests.set(leg.id, request);
+    return request;
   }
 
   function normalizedPlanningRange(value) {
@@ -166,7 +265,7 @@
     return stations.sort((a, b) => {
       if (dynamicTarget) {
         const targetDifference = finite(a.targetDeltaKm, 999) - finite(b.targetDeltaKm, 999);
-        if (Math.abs(targetDifference) > 10) return targetDifference;
+        if (Math.abs(targetDifference) > 0.05) return targetDifference;
       }
       if (state.filter === "price") return finite(a.price) - finite(b.price);
       if (state.filter === "distance") return finite(a.match.routeDistanceKm) - finite(b.match.routeDistanceKm);
@@ -228,7 +327,7 @@
       parts.push(`~${decimal.format(Number(station.targetProgressKm))} km dal pieno`);
     }
     if (Number.isFinite(Number(station.match?.routeDistanceKm))) {
-      parts.push(`~${decimal.format(Number(station.match.routeDistanceKm))} km dalla traccia indicativa`);
+      parts.push(`~${decimal.format(Number(station.match.routeDistanceKm))} km dal percorso stradale`);
     }
     parts.push(station.isSelf ? "self" : "servito");
     if (station.communicatedAt) parts.push(`prezzo ${dateLabel(station.communicatedAt)}`);
@@ -309,6 +408,8 @@
 
   function renderVehicle() {
     const vehicle = state.config.vehicle;
+    const planner = $("#autonomy-card");
+    planner.hidden = !dynamicZone();
     const percentage = Math.round((state.planningRangeKm / vehicle.declaredRangeKm) * 100);
     $("#declared-range").textContent = String(vehicle.declaredRangeKm);
     $("#planning-range").textContent = String(state.planningRangeKm);
@@ -586,7 +687,7 @@
     if (state.routeLayer) state.routeLayer.remove();
     state.stationLayer.clearLayers();
     state.markers.clear();
-    state.routeLayer = L.polyline(leg.route, {
+    state.routeLayer = L.polyline(routeCoordinates(leg), {
       color: "#2f6bff",
       weight: 6,
       opacity: 0.92,
@@ -683,9 +784,10 @@
   function bindEvents() {
     $$(".day-tab").forEach((tab) => tab.addEventListener("click", () => {
       state.day = Number(tab.dataset.day);
-      state.zoneId = currentLeg().fuelWindows[0].id;
+      state.zoneId = defaultZone().id;
       state.selectedId = null;
       renderAll();
+      void ensureRoadRoute();
     }));
     $$(".filter-chip").forEach((button) => button.addEventListener("click", () => {
       state.filter = button.dataset.filter;
@@ -695,17 +797,27 @@
     }));
     $("#planning-range-control").addEventListener("input", (event) => {
       state.planningRangeKm = normalizedPlanningRange(event.target.value);
+      const targetZone = dynamicZone();
+      if (targetZone) state.zoneId = targetZone.id;
       state.selectedId = null;
       localStorage.setItem("gpl-road-trip-planning-range", String(state.planningRangeKm));
       renderVehicle();
-      if (currentZone().dynamicTarget) renderStations({ fitMap: false });
+      if (targetZone) {
+        renderRoute();
+        renderStations({ fitMap: false });
+      }
     });
     $("#petrol-buffer-control").addEventListener("change", (event) => {
       state.allowPetrol = event.target.checked;
+      const targetZone = dynamicZone();
+      if (targetZone) state.zoneId = targetZone.id;
       state.selectedId = null;
       localStorage.setItem("gpl-road-trip-allow-petrol", String(state.allowPetrol));
       renderVehicle();
-      if (currentZone().dynamicTarget) renderStations({ fitMap: false });
+      if (targetZone) {
+        renderRoute();
+        renderStations({ fitMap: false });
+      }
     });
     $("#fit-route-button").addEventListener("click", fitRoute);
     $("#my-location-button").addEventListener("click", () => {
@@ -756,10 +868,11 @@
       state.allowPetrol = savedPetrol === null
         ? state.config.vehicle.allowPetrolDefault !== false
         : savedPetrol === "true";
-      state.zoneId = currentLeg().fuelWindows[0].id;
+      state.zoneId = defaultZone().id;
       initMap();
       bindEvents();
       renderAll();
+      void ensureRoadRoute();
       if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
         navigator.serviceWorker.register("./service-worker.js").catch((error) => console.warn("Service worker:", error));
       }
