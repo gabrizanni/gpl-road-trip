@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-07T15:42:45.533Z",
+  "generatedAt": "2026-10-09T15:30:07.560Z",
   "fuel": "GPL",
   "unit": "EUR/L",
   "source": {
@@ -9,8 +9,8 @@
     "datasetPage": "https://www.mimit.gov.it/it/open-data/elenco-dataset/carburanti-prezzi-praticati-e-anagrafica-degli-impianti",
     "registryUrl": "https://www.mimit.gov.it/images/exportCSV/anagrafica_impianti_attivi.csv",
     "pricesUrl": "https://www.mimit.gov.it/images/exportCSV/prezzo_alle_8.csv",
-    "registryNote": "Estrazione del 2026-10-06",
-    "pricesNote": "Estrazione del 2026-10-06"
+    "registryNote": "Estrazione del 2026-10-08",
+    "pricesNote": "Estrazione del 2026-10-08"
   },
   "selection": {
     "strategy": "balanced-price-distance-freshness",
@@ -32303,40 +32303,40 @@
           13.742437
         ],
         [
-          43.275479,
-          13.742613
+          43.275477,
+          13.742606
         ],
         [
-          43.275232,
-          13.74275
+          43.275231,
+          13.742745
         ],
         [
-          43.27493,
-          13.742918
+          43.274929,
+          13.742916
         ],
         [
           43.274622,
           13.74309
         ],
         [
-          43.274307,
-          13.743255
+          43.274304,
+          13.743241
         ],
         [
-          43.273968,
-          13.743412
+          43.273966,
+          13.743402
         ],
         [
-          43.273646,
-          13.743563
+          43.273644,
+          13.743554
         ],
         [
-          43.273323,
-          13.743713
+          43.273322,
+          13.743707
         ],
         [
-          43.273001,
-          13.743862
+          43.273,
+          13.74386
         ],
         [
           43.272679,
@@ -32683,60 +32683,88 @@
           13.777302
         ],
         [
-          43.206082,
-          13.777679
+          43.206096,
+          13.777675
         ],
         [
-          43.202453,
-          13.778237
+          43.204605,
+          13.777908
         ],
         [
-          43.202006,
-          13.778324
+          43.202905,
+          13.778158
         ],
         [
-          43.201782,
-          13.778359
+          43.20202,
+          13.778325
         ],
         [
-          43.200088,
-          13.778623
+          43.201789,
+          13.778361
         ],
         [
-          43.199594,
-          13.778744
+          43.20086,
+          13.778521
         ],
         [
-          43.199093,
-          13.778863
+          43.200206,
+          13.778622
         ],
         [
-          43.198596,
-          13.779072
+          43.199625,
+          13.778736
         ],
         [
-          43.198114,
-          13.779347
+          43.19907,
+          13.778915
         ],
         [
-          43.197213,
-          13.779987
+          43.198594,
+          13.779133
         ],
         [
-          43.196962,
-          13.780181
+          43.198108,
+          13.77941
         ],
         [
-          43.195932,
-          13.780978
+          43.197337,
+          13.779948
         ],
         [
-          43.19543,
-          13.781339
+          43.19697,
+          13.780213
         ],
         [
-          43.194529,
-          13.781986
+          43.196679,
+          13.780424
+        ],
+        [
+          43.196389,
+          13.780633
+        ],
+        [
+          43.196099,
+          13.780843
+        ],
+        [
+          43.19581,
+          13.781051
+        ],
+        [
+          43.19552,
+          13.781261
+        ],
+        [
+          43.195228,
+          13.781472
+        ],
+        [
+          43.19494,
+          13.78168
+        ],
+        [
+          43.194647,
+          13.781892
         ],
         [
           43.193615,
@@ -55834,7 +55862,7 @@
           "zoneDistanceKm": 1.7,
           "routeDistanceKm": 0.3,
           "progressKm": 120.2,
-          "score": 0.145
+          "score": 0.1503
         }
       ]
     },
@@ -55850,9 +55878,9 @@
       "lat": 40.910627768225716,
       "lng": 17.322014272212982,
       "fuel": "GPL",
-      "price": 0.779,
+      "price": 0.789,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T03:57:04.000Z",
+      "communicatedAt": "2026-10-08T04:53:04.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -55863,7 +55891,7 @@
           "zoneDistanceKm": 20.5,
           "routeDistanceKm": 0,
           "progressKm": 605.8,
-          "score": 0.5429
+          "score": 0.5717
         }
       ]
     },
@@ -55892,7 +55920,7 @@
           "zoneDistanceKm": 2.7,
           "routeDistanceKm": 0.3,
           "progressKm": 358.7,
-          "score": 0.33
+          "score": 0.3353
         },
         {
           "legId": "day-2",
@@ -55903,7 +55931,7 @@
           "zoneDistanceKm": 2.7,
           "routeDistanceKm": 2.6,
           "progressKm": 0.9,
-          "score": 0.4113
+          "score": 0.4166
         }
       ]
     },
@@ -55921,7 +55949,7 @@
       "fuel": "GPL",
       "price": 0.779,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T07:32:32.000Z",
+      "communicatedAt": "2026-10-06T07:55:32.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -55932,7 +55960,7 @@
           "zoneDistanceKm": 10.2,
           "routeDistanceKm": 10.2,
           "progressKm": 633.5,
-          "score": 0.7704
+          "score": 0.773
         }
       ]
     },
@@ -55950,7 +55978,7 @@
       "fuel": "GPL",
       "price": 0.779,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T07:31:33.000Z",
+      "communicatedAt": "2026-10-06T07:48:46.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -55961,7 +55989,65 @@
           "zoneDistanceKm": 11.1,
           "routeDistanceKm": 0,
           "progressKm": 616.2,
-          "score": 0.5022
+          "score": 0.5048
+        }
+      ]
+    },
+    {
+      "id": "5730",
+      "name": "OP Olivi Petroli",
+      "brand": "Pompe Bianche",
+      "manager": "LE-ALE S.R.L.",
+      "roadType": "Stradale",
+      "address": "SS318  06134",
+      "municipality": "PERUGIA",
+      "province": "PG",
+      "lat": 43.123642,
+      "lng": 12.5156778,
+      "fuel": "GPL",
+      "price": 0.749,
+      "isSelf": false,
+      "communicatedAt": "2026-10-06T07:20:05.000Z",
+      "matches": [
+        {
+          "legId": "day-2",
+          "zoneId": "perugia",
+          "zoneLabel": "Perugia · pieno prima di partire",
+          "zonePriority": 0,
+          "zoneRadiusKm": 18,
+          "zoneDistanceKm": 10.2,
+          "routeDistanceKm": 4.9,
+          "progressKm": 9.8,
+          "score": 0.4209
+        }
+      ]
+    },
+    {
+      "id": "5759",
+      "name": "PETROLADRIATICASNC",
+      "brand": "Tamoil",
+      "manager": "PETROL ADRIATICA S.N.C. DI SCARCELLI NUNZIO & C.",
+      "roadType": "Stradale",
+      "address": "Statale 16 Adriatica, Km. 552+016, dir. sud - 86042",
+      "municipality": "CAMPOMARINO",
+      "province": "CB",
+      "lat": 41.95202741400315,
+      "lng": 15.04936623545791,
+      "fuel": "GPL",
+      "price": 0.769,
+      "isSelf": false,
+      "communicatedAt": "2026-10-07T12:06:06.000Z",
+      "matches": [
+        {
+          "legId": "day-2",
+          "zoneId": "adriatica",
+          "zoneLabel": "Sosta intermedia · obiettivo 300–320 km",
+          "zonePriority": 1,
+          "zoneRadiusKm": 65,
+          "zoneDistanceKm": 32.7,
+          "routeDistanceKm": 1.3,
+          "progressKm": 358.8,
+          "score": 0.3247
         }
       ]
     },
@@ -55979,7 +56065,7 @@
       "fuel": "GPL",
       "price": 0.727,
       "isSelf": false,
-      "communicatedAt": "2026-10-03T17:00:29.000Z",
+      "communicatedAt": "2026-10-07T17:58:33.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -55990,7 +56076,7 @@
           "zoneDistanceKm": 9,
           "routeDistanceKm": 1.2,
           "progressKm": 130.7,
-          "score": 0.1665
+          "score": 0.1611
         }
       ]
     },
@@ -56006,9 +56092,9 @@
       "lat": 44.50441473465839,
       "lng": 11.201650500297546,
       "fuel": "GPL",
-      "price": 0.699,
+      "price": 0.709,
       "isSelf": false,
-      "communicatedAt": "2026-10-03T05:58:13.000Z",
+      "communicatedAt": "2026-10-07T07:58:05.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56019,7 +56105,7 @@
           "zoneDistanceKm": 8.3,
           "routeDistanceKm": 1.4,
           "progressKm": 100.1,
-          "score": 0.1044
+          "score": 0.1217
         }
       ]
     },
@@ -56035,9 +56121,9 @@
       "lat": 42.13302724931936,
       "lng": 14.409601986408234,
       "fuel": "GPL",
-      "price": 0.765,
+      "price": 0.785,
       "isSelf": false,
-      "communicatedAt": "2026-09-30T10:08:37.000Z",
+      "communicatedAt": "2026-10-07T10:46:16.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56048,7 +56134,7 @@
           "zoneDistanceKm": 24.4,
           "routeDistanceKm": 10.7,
           "progressKm": 299.9,
-          "score": 0.587
+          "score": 0.5858
         }
       ]
     },
@@ -56064,9 +56150,9 @@
       "lat": 42.09783591510486,
       "lng": 14.701091051101685,
       "fuel": "GPL",
-      "price": 0.769,
+      "price": 0.799,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T13:01:52.000Z",
+      "communicatedAt": "2026-10-07T12:56:42.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56077,7 +56163,7 @@
           "zoneDistanceKm": 0.9,
           "routeDistanceKm": 0.3,
           "progressKm": 322.3,
-          "score": 0.2597
+          "score": 0.2873
         }
       ]
     },
@@ -56095,7 +56181,7 @@
       "fuel": "GPL",
       "price": 0.699,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T06:01:34.000Z",
+      "communicatedAt": "2026-10-07T09:19:05.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56106,7 +56192,7 @@
           "zoneDistanceKm": 10.5,
           "routeDistanceKm": 0.6,
           "progressKm": 99,
-          "score": 0.0924
+          "score": 0.092
         }
       ]
     },
@@ -56135,7 +56221,7 @@
           "zoneDistanceKm": 8.7,
           "routeDistanceKm": 5.3,
           "progressKm": 615.8,
-          "score": 0.3782
+          "score": 0.3835
         }
       ]
     },
@@ -56153,7 +56239,7 @@
       "fuel": "GPL",
       "price": 0.789,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T02:58:09.000Z",
+      "communicatedAt": "2026-10-07T11:04:11.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56164,7 +56250,7 @@
           "zoneDistanceKm": 27,
           "routeDistanceKm": 1.7,
           "progressKm": 599.6,
-          "score": 0.6478
+          "score": 0.6469
         }
       ]
     },
@@ -56182,7 +56268,7 @@
       "fuel": "GPL",
       "price": 0.729,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T15:03:37.000Z",
+      "communicatedAt": "2026-10-06T17:54:45.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56193,7 +56279,7 @@
           "zoneDistanceKm": 12.7,
           "routeDistanceKm": 4.3,
           "progressKm": 105.7,
-          "score": 0.2733
+          "score": 0.2756
         }
       ]
     },
@@ -56211,7 +56297,7 @@
       "fuel": "GPL",
       "price": 0.749,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T08:18:40.000Z",
+      "communicatedAt": "2026-10-06T06:47:22.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56222,7 +56308,7 @@
           "zoneDistanceKm": 6.3,
           "routeDistanceKm": 0.3,
           "progressKm": 330.4,
-          "score": 0.2352
+          "score": 0.2206
         }
       ]
     },
@@ -56251,7 +56337,7 @@
           "zoneDistanceKm": 22,
           "routeDistanceKm": 4,
           "progressKm": 503.9,
-          "score": 0.3227
+          "score": 0.3022
         }
       ]
     },
@@ -56269,7 +56355,7 @@
       "fuel": "GPL",
       "price": 0.769,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T18:15:07.000Z",
+      "communicatedAt": "2026-10-07T18:15:07.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56280,7 +56366,7 @@
           "zoneDistanceKm": 10.8,
           "routeDistanceKm": 2.1,
           "progressKm": 473.9,
-          "score": 0.3204
+          "score": 0.2819
         }
       ]
     },
@@ -56298,7 +56384,7 @@
       "fuel": "GPL",
       "price": 0.719,
       "isSelf": false,
-      "communicatedAt": "2026-10-06T05:14:53.000Z",
+      "communicatedAt": "2026-10-07T05:22:43.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56309,7 +56395,7 @@
           "zoneDistanceKm": 12.1,
           "routeDistanceKm": 0.6,
           "progressKm": 14.2,
-          "score": 0.1538
+          "score": 0.1565
         }
       ]
     },
@@ -56327,7 +56413,7 @@
       "fuel": "GPL",
       "price": 0.789,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T05:55:11.000Z",
+      "communicatedAt": "2026-10-07T06:31:12.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56338,7 +56424,7 @@
           "zoneDistanceKm": 24.8,
           "routeDistanceKm": 0.9,
           "progressKm": 600.8,
-          "score": 0.6167
+          "score": 0.6166
         }
       ]
     },
@@ -56356,7 +56442,7 @@
       "fuel": "GPL",
       "price": 0.769,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T05:17:57.000Z",
+      "communicatedAt": "2026-10-07T12:37:04.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56367,7 +56453,7 @@
           "zoneDistanceKm": 9.8,
           "routeDistanceKm": 1.7,
           "progressKm": 623.9,
-          "score": 0.5107
+          "score": 0.5098
         }
       ]
     },
@@ -56385,7 +56471,7 @@
       "fuel": "GPL",
       "price": 0.799,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T04:06:10.000Z",
+      "communicatedAt": "2026-10-06T12:21:34.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56396,7 +56482,7 @@
           "zoneDistanceKm": 8.1,
           "routeDistanceKm": 0.2,
           "progressKm": 105.4,
-          "score": 0.2945
+          "score": 0.2963
         }
       ]
     },
@@ -56414,7 +56500,7 @@
       "fuel": "GPL",
       "price": 0.719,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T08:29:07.000Z",
+      "communicatedAt": "2026-10-06T07:14:48.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56425,7 +56511,7 @@
           "zoneDistanceKm": 20.9,
           "routeDistanceKm": 1.8,
           "progressKm": 503.5,
-          "score": 0.2435
+          "score": 0.2236
         }
       ]
     },
@@ -56443,7 +56529,7 @@
       "fuel": "GPL",
       "price": 0.769,
       "isSelf": false,
-      "communicatedAt": "2026-10-03T03:40:07.000Z",
+      "communicatedAt": "2026-10-06T19:46:24.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56454,36 +56540,36 @@
           "zoneDistanceKm": 6.6,
           "routeDistanceKm": 0,
           "progressKm": 353.9,
-          "score": 0.356
+          "score": 0.3515
         }
       ]
     },
     {
-      "id": "31338",
-      "name": "RIO VIVO EST",
-      "brand": "Tamoil",
-      "manager": "NUOVA SIDAP S.R.L.",
-      "roadType": "Autostradale",
-      "address": "Autostrada A14 BOLOGNA-BARI-TARANTO, Km. -, dir. Est - 86039",
-      "municipality": "TERMOLI",
-      "province": "CB",
-      "lat": 41.998471389858594,
-      "lng": 14.978136420249939,
+      "id": "31809",
+      "name": "LOVAGLIO CARBURANTI",
+      "brand": "Pompe Bianche",
+      "manager": "TOURIST SERVICE S.R.L.",
+      "roadType": "Stradale",
+      "address": "Strada Statale, Km. 1, CORATO  76123",
+      "municipality": "ANDRIA",
+      "province": "BT",
+      "lat": 41.22452665604122,
+      "lng": 16.321658939123154,
       "fuel": "GPL",
-      "price": 0.739,
+      "price": 0.738,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T20:00:09.000Z",
+      "communicatedAt": "2026-10-07T02:13:21.000Z",
       "matches": [
         {
           "legId": "day-2",
-          "zoneId": "adriatica",
-          "zoneLabel": "Sosta intermedia · obiettivo 300–320 km",
-          "zonePriority": 1,
-          "zoneRadiusKm": 65,
+          "zoneId": "puglia",
+          "zoneLabel": "Puglia lungo il percorso",
+          "zonePriority": 2,
+          "zoneRadiusKm": 48,
           "zoneDistanceKm": 25.1,
-          "routeDistanceKm": 0.1,
-          "progressKm": 349.9,
-          "score": 0.2459
+          "routeDistanceKm": 2.9,
+          "progressKm": 506.9,
+          "score": 0.2915
         }
       ]
     },
@@ -56501,7 +56587,7 @@
       "fuel": "GPL",
       "price": 0.719,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T16:43:23.000Z",
+      "communicatedAt": "2026-10-06T16:34:44.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56512,7 +56598,7 @@
           "zoneDistanceKm": 15.2,
           "routeDistanceKm": 0.9,
           "progressKm": 17.2,
-          "score": 0.1839
+          "score": 0.1865
         }
       ]
     },
@@ -56541,7 +56627,7 @@
           "zoneDistanceKm": 7.9,
           "routeDistanceKm": 2,
           "progressKm": 625.9,
-          "score": 0.2874
+          "score": 0.2928
         }
       ]
     },
@@ -56559,7 +56645,7 @@
       "fuel": "GPL",
       "price": 0.787,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T07:09:32.000Z",
+      "communicatedAt": "2026-10-07T07:10:06.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56588,7 +56674,7 @@
       "fuel": "GPL",
       "price": 0.747,
       "isSelf": false,
-      "communicatedAt": "2026-10-04T19:51:03.000Z",
+      "communicatedAt": "2026-10-07T05:14:25.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56599,7 +56685,7 @@
           "zoneDistanceKm": 4.4,
           "routeDistanceKm": 2,
           "progressKm": 328.2,
-          "score": 0.275
+          "score": 0.2567
         }
       ]
     },
@@ -56617,7 +56703,7 @@
       "fuel": "GPL",
       "price": 0.715,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T07:22:29.000Z",
+      "communicatedAt": "2026-10-07T07:26:22.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56628,7 +56714,7 @@
           "zoneDistanceKm": 3.6,
           "routeDistanceKm": 7.2,
           "progressKm": 485.2,
-          "score": 0.3368
+          "score": 0.3153
         }
       ]
     },
@@ -56646,7 +56732,7 @@
       "fuel": "GPL",
       "price": 0.749,
       "isSelf": false,
-      "communicatedAt": "2026-10-04T05:04:04.000Z",
+      "communicatedAt": "2026-10-07T04:01:18.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56657,7 +56743,7 @@
           "zoneDistanceKm": 5,
           "routeDistanceKm": 5,
           "progressKm": 362.7,
-          "score": 0.3558
+          "score": 0.3533
         },
         {
           "legId": "day-2",
@@ -56668,7 +56754,7 @@
           "zoneDistanceKm": 5,
           "routeDistanceKm": 1.7,
           "progressKm": 5,
-          "score": 0.3012
+          "score": 0.2986
         }
       ]
     },
@@ -56686,7 +56772,7 @@
       "fuel": "GPL",
       "price": 0.769,
       "isSelf": false,
-      "communicatedAt": "2026-10-02T19:58:04.000Z",
+      "communicatedAt": "2026-10-06T07:37:23.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56697,7 +56783,7 @@
           "zoneDistanceKm": 5,
           "routeDistanceKm": 1.7,
           "progressKm": 5,
-          "score": 0.4115
+          "score": 0.4075
         }
       ]
     },
@@ -56726,7 +56812,7 @@
           "zoneDistanceKm": 7.2,
           "routeDistanceKm": 6.4,
           "progressKm": 359.2,
-          "score": 0.4035
+          "score": 0.4089
         },
         {
           "legId": "day-2",
@@ -56737,7 +56823,7 @@
           "zoneDistanceKm": 7.2,
           "routeDistanceKm": 5.2,
           "progressKm": 5,
-          "score": 0.4049
+          "score": 0.4102
         }
       ]
     },
@@ -56755,7 +56841,7 @@
       "fuel": "GPL",
       "price": 0.647,
       "isSelf": false,
-      "communicatedAt": "2026-10-01T15:02:28.000Z",
+      "communicatedAt": "2026-10-06T16:34:19.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56766,7 +56852,7 @@
           "zoneDistanceKm": 18.5,
           "routeDistanceKm": 4.7,
           "progressKm": 500.8,
-          "score": 0.1877
+          "score": 0.1795
         }
       ]
     },
@@ -56784,7 +56870,7 @@
       "fuel": "GPL",
       "price": 0.769,
       "isSelf": false,
-      "communicatedAt": "2026-10-04T04:58:08.000Z",
+      "communicatedAt": "2026-10-07T04:49:27.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56795,7 +56881,36 @@
           "zoneDistanceKm": 6.1,
           "routeDistanceKm": 2.6,
           "progressKm": 354.6,
-          "score": 0.4192
+          "score": 0.4165
+        }
+      ]
+    },
+    {
+      "id": "45530",
+      "name": "EASY SERVICE S.R.L. / CRESPELLANO",
+      "brand": "Q8",
+      "manager": "EASY SERVICE S.R.L.",
+      "roadType": "Stradale",
+      "address": "Via Emilia 73 40053",
+      "municipality": "VALSAMOGGIA",
+      "province": "BO",
+      "lat": 44.566588000123,
+      "lng": 11.133631000123,
+      "fuel": "GPL",
+      "price": 0.749,
+      "isSelf": false,
+      "communicatedAt": "2026-10-07T13:01:29.000Z",
+      "matches": [
+        {
+          "legId": "day-1",
+          "zoneId": "bologna",
+          "zoneLabel": "Dopo l’aeroporto · Bologna",
+          "zonePriority": 1,
+          "zoneRadiusKm": 18,
+          "zoneDistanceKm": 17,
+          "routeDistanceKm": 3.5,
+          "progressKm": 93.2,
+          "score": 0.3266
         }
       ]
     },
@@ -56813,7 +56928,7 @@
       "fuel": "GPL",
       "price": 0.769,
       "isSelf": false,
-      "communicatedAt": "2026-10-04T04:31:02.000Z",
+      "communicatedAt": "2026-10-06T17:07:11.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56824,7 +56939,7 @@
           "zoneDistanceKm": 3.3,
           "routeDistanceKm": 3.3,
           "progressKm": 362.7,
-          "score": 0.4192
+          "score": 0.4178
         }
       ]
     },
@@ -56842,7 +56957,7 @@
       "fuel": "GPL",
       "price": 0.769,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T10:06:39.000Z",
+      "communicatedAt": "2026-10-06T16:10:03.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56853,7 +56968,7 @@
           "zoneDistanceKm": 2.8,
           "routeDistanceKm": 0.5,
           "progressKm": 357.9,
-          "score": 0.338
+          "score": 0.3399
         },
         {
           "legId": "day-2",
@@ -56864,7 +56979,7 @@
           "zoneDistanceKm": 2.8,
           "routeDistanceKm": 2.8,
           "progressKm": 0.4,
-          "score": 0.4193
+          "score": 0.4213
         }
       ]
     },
@@ -56882,7 +56997,7 @@
       "fuel": "GPL",
       "price": 0.759,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T09:37:35.000Z",
+      "communicatedAt": "2026-10-06T10:10:09.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56893,7 +57008,7 @@
           "zoneDistanceKm": 12.3,
           "routeDistanceKm": 0,
           "progressKm": 346.7,
-          "score": 0.328
+          "score": 0.3306
         }
       ]
     },
@@ -56911,7 +57026,7 @@
       "fuel": "GPL",
       "price": 0.768,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T12:56:50.000Z",
+      "communicatedAt": "2026-10-07T20:00:18.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56922,7 +57037,7 @@
           "zoneDistanceKm": 3.3,
           "routeDistanceKm": 0.4,
           "progressKm": 358.3,
-          "score": 0.3323
+          "score": 0.3315
         }
       ]
     },
@@ -56940,7 +57055,7 @@
       "fuel": "GPL",
       "price": 0.687,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T05:13:32.000Z",
+      "communicatedAt": "2026-10-08T05:18:35.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56951,36 +57066,7 @@
           "zoneDistanceKm": 17,
           "routeDistanceKm": 5,
           "progressKm": 500.6,
-          "score": 0.2585
-        }
-      ]
-    },
-    {
-      "id": "47638",
-      "name": "CIOCCOLONI G.& C. SNC",
-      "brand": "Q8",
-      "manager": "CIOCCOLONI GIULIO & C. S.N.C. DI CIOCCOLONI PAOLA E PATRIZIA",
-      "roadType": "Stradale",
-      "address": "75 Centrale Umbra, Km. 8,205, PERUGIA - 06083",
-      "municipality": "BASTIA UMBRA",
-      "province": "PG",
-      "lat": 43.056286778535195,
-      "lng": 12.56199866881324,
-      "fuel": "GPL",
-      "price": 0.729,
-      "isSelf": false,
-      "communicatedAt": "2026-10-03T04:05:33.000Z",
-      "matches": [
-        {
-          "legId": "day-2",
-          "zoneId": "perugia",
-          "zoneLabel": "Perugia · pieno prima di partire",
-          "zonePriority": 0,
-          "zoneRadiusKm": 18,
-          "zoneDistanceKm": 15.2,
-          "routeDistanceKm": 0,
-          "progressKm": 17.2,
-          "score": 0.22
+          "score": 0.2432
         }
       ]
     },
@@ -56998,7 +57084,7 @@
       "fuel": "GPL",
       "price": 0.709,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T14:17:01.000Z",
+      "communicatedAt": "2026-10-07T06:59:30.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57009,7 +57095,7 @@
           "zoneDistanceKm": 31.5,
           "routeDistanceKm": 2.2,
           "progressKm": 446.9,
-          "score": 0.261
+          "score": 0.2422
         }
       ]
     },
@@ -57027,7 +57113,7 @@
       "fuel": "GPL",
       "price": 0.699,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T18:18:12.000Z",
+      "communicatedAt": "2026-10-06T14:03:15.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57038,7 +57124,7 @@
           "zoneDistanceKm": 21.3,
           "routeDistanceKm": 2.9,
           "progressKm": 503.4,
-          "score": 0.2347
+          "score": 0.2214
         }
       ]
     },
@@ -57067,7 +57153,7 @@
           "zoneDistanceKm": 11.7,
           "routeDistanceKm": 11.7,
           "progressKm": 362.7,
-          "score": 0.3956
+          "score": 0.4009
         },
         {
           "legId": "day-2",
@@ -57078,7 +57164,7 @@
           "zoneDistanceKm": 11.7,
           "routeDistanceKm": 0,
           "progressKm": 13.7,
-          "score": 0.1369
+          "score": 0.1422
         }
       ]
     },
@@ -57096,7 +57182,7 @@
       "fuel": "GPL",
       "price": 0.629,
       "isSelf": false,
-      "communicatedAt": "2026-10-03T08:39:45.000Z",
+      "communicatedAt": "2026-10-07T16:50:33.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57107,7 +57193,7 @@
           "zoneDistanceKm": 29.2,
           "routeDistanceKm": 1.2,
           "progressKm": 354.6,
-          "score": 0.0974
+          "score": 0.0911
         }
       ]
     },
@@ -57125,7 +57211,7 @@
       "fuel": "GPL",
       "price": 0.719,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T06:26:40.000Z",
+      "communicatedAt": "2026-10-07T06:33:44.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -57136,7 +57222,7 @@
           "zoneDistanceKm": 12,
           "routeDistanceKm": 12,
           "progressKm": 362.7,
-          "score": 0.4064
+          "score": 0.4063
         },
         {
           "legId": "day-2",
@@ -57148,35 +57234,6 @@
           "routeDistanceKm": 7.2,
           "progressKm": 9.8,
           "score": 0.3317
-        }
-      ]
-    },
-    {
-      "id": "51221",
-      "name": "SASSOMET SRL",
-      "brand": "Pompe Bianche",
-      "manager": "SASSOMET SOCIETA' A RESPONSABILITA' LIMITATA",
-      "roadType": "Stradale",
-      "address": "VIA MARIA MARGOTTI 2/4 40033",
-      "municipality": "CASALECCHIO DI RENO",
-      "province": "BO",
-      "lat": 44.49177583692846,
-      "lng": 11.255071500224174,
-      "fuel": "GPL",
-      "price": 0.759,
-      "isSelf": false,
-      "communicatedAt": "2026-10-02T13:37:44.000Z",
-      "matches": [
-        {
-          "legId": "day-1",
-          "zoneId": "bologna",
-          "zoneLabel": "Dopo l’aeroporto · Bologna",
-          "zonePriority": 1,
-          "zoneRadiusKm": 18,
-          "zoneDistanceKm": 4.5,
-          "routeDistanceKm": 0.8,
-          "progressKm": 118.2,
-          "score": 0.202
         }
       ]
     },
@@ -57194,7 +57251,7 @@
       "fuel": "GPL",
       "price": 0.709,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T12:36:20.000Z",
+      "communicatedAt": "2026-10-06T18:12:57.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57205,7 +57262,7 @@
           "zoneDistanceKm": 14,
           "routeDistanceKm": 1,
           "progressKm": 16.1,
-          "score": 0.1257
+          "score": 0.1277
         }
       ]
     },
@@ -57234,7 +57291,7 @@
           "zoneDistanceKm": 5.4,
           "routeDistanceKm": 0.8,
           "progressKm": 328.9,
-          "score": 0.2882
+          "score": 0.2724
         }
       ]
     },
@@ -57252,7 +57309,7 @@
       "fuel": "GPL",
       "price": 0.804,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T04:34:23.000Z",
+      "communicatedAt": "2026-10-07T05:59:14.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -57263,7 +57320,7 @@
           "zoneDistanceKm": 4.4,
           "routeDistanceKm": 0.6,
           "progressKm": 117.2,
-          "score": 0.2919
+          "score": 0.2917
         }
       ]
     },
@@ -57279,9 +57336,9 @@
       "lat": 44.498667369098385,
       "lng": 11.198332812164267,
       "fuel": "GPL",
-      "price": 0.699,
+      "price": 0.719,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T04:17:03.000Z",
+      "communicatedAt": "2026-10-06T13:49:08.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -57292,7 +57349,7 @@
           "zoneDistanceKm": 8.1,
           "routeDistanceKm": 1.7,
           "progressKm": 100,
-          "score": 0.1059
+          "score": 0.1532
         }
       ]
     },
@@ -57310,7 +57367,7 @@
       "fuel": "GPL",
       "price": 0.769,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T11:53:50.000Z",
+      "communicatedAt": "2026-10-07T05:22:34.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57321,7 +57378,7 @@
           "zoneDistanceKm": 5.7,
           "routeDistanceKm": 1.7,
           "progressKm": 330.7,
-          "score": 0.306
+          "score": 0.2863
         }
       ]
     },
@@ -57350,7 +57407,7 @@
           "zoneDistanceKm": 17.6,
           "routeDistanceKm": 10.7,
           "progressKm": 624,
-          "score": 0.5604
+          "score": 0.5657
         }
       ]
     },
@@ -57368,7 +57425,7 @@
       "fuel": "GPL",
       "price": 0.767,
       "isSelf": false,
-      "communicatedAt": "2026-10-04T09:36:51.000Z",
+      "communicatedAt": "2026-10-07T12:27:18.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57379,7 +57436,7 @@
           "zoneDistanceKm": 3,
           "routeDistanceKm": 2.3,
           "progressKm": 324.1,
-          "score": 0.3164
+          "score": 0.2933
         }
       ]
     },
@@ -57397,7 +57454,7 @@
       "fuel": "GPL",
       "price": 0.719,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T08:08:56.000Z",
+      "communicatedAt": "2026-10-06T07:18:08.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57408,7 +57465,7 @@
           "zoneDistanceKm": 21.6,
           "routeDistanceKm": 1.8,
           "progressKm": 504,
-          "score": 0.2453
+          "score": 0.2253
         }
       ]
     },
@@ -57437,7 +57494,7 @@
           "zoneDistanceKm": 44.3,
           "routeDistanceKm": 2.7,
           "progressKm": 527.3,
-          "score": 0.2867
+          "score": 0.2756
         }
       ]
     },
@@ -57466,7 +57523,7 @@
           "zoneDistanceKm": 21.6,
           "routeDistanceKm": 5.6,
           "progressKm": 503.7,
-          "score": 0.2315
+          "score": 0.233
         }
       ]
     },
@@ -57482,9 +57539,9 @@
       "lat": 44.52918979592056,
       "lng": 11.271357319114994,
       "fuel": "GPL",
-      "price": 0.719,
+      "price": 0.729,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T05:37:57.000Z",
+      "communicatedAt": "2026-10-06T16:46:09.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -57495,7 +57552,7 @@
           "zoneDistanceKm": 8.3,
           "routeDistanceKm": 0.5,
           "progressKm": 106.8,
-          "score": 0.1208
+          "score": 0.1451
         }
       ]
     },
@@ -57513,7 +57570,7 @@
       "fuel": "GPL",
       "price": 0.769,
       "isSelf": false,
-      "communicatedAt": "2026-10-03T05:33:38.000Z",
+      "communicatedAt": "2026-10-07T04:33:30.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -57524,7 +57581,7 @@
           "zoneDistanceKm": 11.3,
           "routeDistanceKm": 2.6,
           "progressKm": 102,
-          "score": 0.3165
+          "score": 0.3112
         }
       ]
     },
@@ -57553,7 +57610,7 @@
           "zoneDistanceKm": 6.8,
           "routeDistanceKm": 1,
           "progressKm": 114.3,
-          "score": 0.214
+          "score": 0.2193
         }
       ]
     },
@@ -57571,7 +57628,7 @@
       "fuel": "GPL",
       "price": 0.769,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T03:40:14.000Z",
+      "communicatedAt": "2026-10-08T03:31:03.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57582,7 +57639,7 @@
           "zoneDistanceKm": 8.7,
           "routeDistanceKm": 0.5,
           "progressKm": 623.9,
-          "score": 0.4741
+          "score": 0.4715
         }
       ]
     },
@@ -57600,7 +57657,7 @@
       "fuel": "GPL",
       "price": 0.768,
       "isSelf": false,
-      "communicatedAt": "2026-10-02T07:05:48.000Z",
+      "communicatedAt": "2026-10-06T13:32:01.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57611,7 +57668,7 @@
           "zoneDistanceKm": 10.3,
           "routeDistanceKm": 1,
           "progressKm": 312.9,
-          "score": 0.3026
+          "score": 0.2763
         }
       ]
     },
@@ -57629,7 +57686,7 @@
       "fuel": "GPL",
       "price": 0.768,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T06:59:55.000Z",
+      "communicatedAt": "2026-10-06T13:03:43.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57640,36 +57697,7 @@
           "zoneDistanceKm": 3.3,
           "routeDistanceKm": 1.5,
           "progressKm": 320,
-          "score": 0.295
-        }
-      ]
-    },
-    {
-      "id": "59059",
-      "name": "BATFUEL",
-      "brand": "Pompe Bianche",
-      "manager": "BAT - FUEL S.R.L.",
-      "roadType": "Stradale",
-      "address": "Vicinale Petraro  76121",
-      "municipality": "BARLETTA",
-      "province": "BT",
-      "lat": 41.3027527,
-      "lng": 16.2835675,
-      "fuel": "GPL",
-      "price": 0.659,
-      "isSelf": false,
-      "communicatedAt": "2026-10-02T09:30:03.000Z",
-      "matches": [
-        {
-          "legId": "day-2",
-          "zoneId": "puglia",
-          "zoneLabel": "Puglia lungo il percorso",
-          "zonePriority": 2,
-          "zoneRadiusKm": 48,
-          "zoneDistanceKm": 19.6,
-          "routeDistanceKm": 5,
-          "progressKm": 501.8,
-          "score": 0.2192
+          "score": 0.2768
         }
       ]
     },
@@ -57698,7 +57726,7 @@
           "zoneDistanceKm": 16.7,
           "routeDistanceKm": 8.4,
           "progressKm": 623.9,
-          "score": 0.3031
+          "score": 0.3084
         }
       ]
     },
@@ -57716,7 +57744,7 @@
       "fuel": "GPL",
       "price": 0.758,
       "isSelf": false,
-      "communicatedAt": "2026-10-03T08:14:22.000Z",
+      "communicatedAt": "2026-10-07T09:19:29.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57727,7 +57755,7 @@
           "zoneDistanceKm": 28.3,
           "routeDistanceKm": 0.4,
           "progressKm": 353.4,
-          "score": 0.2996
+          "score": 0.2753
         }
       ]
     },
@@ -57745,7 +57773,7 @@
       "fuel": "GPL",
       "price": 0.729,
       "isSelf": false,
-      "communicatedAt": "2026-10-06T04:01:24.000Z",
+      "communicatedAt": "2026-10-08T04:04:25.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -57756,7 +57784,7 @@
           "zoneDistanceKm": 5.9,
           "routeDistanceKm": 0.4,
           "progressKm": 354.6,
-          "score": 0.114
+          "score": 0.1139
         },
         {
           "legId": "day-2",
