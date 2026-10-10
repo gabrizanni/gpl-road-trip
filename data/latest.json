@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-09T15:30:07.560Z",
+  "generatedAt": "2026-10-10T14:37:20.963Z",
   "fuel": "GPL",
   "unit": "EUR/L",
   "source": {
@@ -9,8 +9,8 @@
     "datasetPage": "https://www.mimit.gov.it/it/open-data/elenco-dataset/carburanti-prezzi-praticati-e-anagrafica-degli-impianti",
     "registryUrl": "https://www.mimit.gov.it/images/exportCSV/anagrafica_impianti_attivi.csv",
     "pricesUrl": "https://www.mimit.gov.it/images/exportCSV/prezzo_alle_8.csv",
-    "registryNote": "Estrazione del 2026-10-08",
-    "pricesNote": "Estrazione del 2026-10-08"
+    "registryNote": "Estrazione del 2026-10-09",
+    "pricesNote": "Estrazione del 2026-10-09"
   },
   "selection": {
     "strategy": "balanced-price-distance-freshness",
@@ -55862,7 +55862,7 @@
           "zoneDistanceKm": 1.7,
           "routeDistanceKm": 0.3,
           "progressKm": 120.2,
-          "score": 0.1503
+          "score": 0.1346
         }
       ]
     },
@@ -55891,7 +55891,7 @@
           "zoneDistanceKm": 20.5,
           "routeDistanceKm": 0,
           "progressKm": 605.8,
-          "score": 0.5717
+          "score": 0.5743
         }
       ]
     },
@@ -55909,7 +55909,7 @@
       "fuel": "GPL",
       "price": 0.769,
       "isSelf": false,
-      "communicatedAt": "2026-10-06T03:49:07.000Z",
+      "communicatedAt": "2026-10-08T19:43:12.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -55920,7 +55920,7 @@
           "zoneDistanceKm": 2.7,
           "routeDistanceKm": 0.3,
           "progressKm": 358.7,
-          "score": 0.3353
+          "score": 0.3308
         },
         {
           "legId": "day-2",
@@ -55931,7 +55931,7 @@
           "zoneDistanceKm": 2.7,
           "routeDistanceKm": 2.6,
           "progressKm": 0.9,
-          "score": 0.4166
+          "score": 0.4121
         }
       ]
     },
@@ -55960,7 +55960,7 @@
           "zoneDistanceKm": 10.2,
           "routeDistanceKm": 10.2,
           "progressKm": 633.5,
-          "score": 0.773
+          "score": 0.755
         }
       ]
     },
@@ -55976,9 +55976,9 @@
       "lat": 40.82501224121072,
       "lng": 17.348731756210327,
       "fuel": "GPL",
-      "price": 0.779,
+      "price": 0.789,
       "isSelf": false,
-      "communicatedAt": "2026-10-06T07:48:46.000Z",
+      "communicatedAt": "2026-10-08T08:16:27.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -55989,7 +55989,7 @@
           "zoneDistanceKm": 11.1,
           "routeDistanceKm": 0,
           "progressKm": 616.2,
-          "score": 0.5048
+          "score": 0.5336
         }
       ]
     },
@@ -56018,7 +56018,7 @@
           "zoneDistanceKm": 10.2,
           "routeDistanceKm": 4.9,
           "progressKm": 9.8,
-          "score": 0.4209
+          "score": 0.4235
         }
       ]
     },
@@ -56047,7 +56047,7 @@
           "zoneDistanceKm": 32.7,
           "routeDistanceKm": 1.3,
           "progressKm": 358.8,
-          "score": 0.3247
+          "score": 0.3273
         }
       ]
     },
@@ -56065,7 +56065,7 @@
       "fuel": "GPL",
       "price": 0.727,
       "isSelf": false,
-      "communicatedAt": "2026-10-07T17:58:33.000Z",
+      "communicatedAt": "2026-10-08T15:59:30.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56076,7 +56076,7 @@
           "zoneDistanceKm": 9,
           "routeDistanceKm": 1.2,
           "progressKm": 130.7,
-          "score": 0.1611
+          "score": 0.1404
         }
       ]
     },
@@ -56105,7 +56105,7 @@
           "zoneDistanceKm": 8.3,
           "routeDistanceKm": 1.4,
           "progressKm": 100.1,
-          "score": 0.1217
+          "score": 0.1014
         }
       ]
     },
@@ -56134,7 +56134,7 @@
           "zoneDistanceKm": 24.4,
           "routeDistanceKm": 10.7,
           "progressKm": 299.9,
-          "score": 0.5858
+          "score": 0.5884
         }
       ]
     },
@@ -56163,7 +56163,7 @@
           "zoneDistanceKm": 0.9,
           "routeDistanceKm": 0.3,
           "progressKm": 322.3,
-          "score": 0.2873
+          "score": 0.2898
         }
       ]
     },
@@ -56179,9 +56179,9 @@
       "lat": 44.51077683230635,
       "lng": 11.173632815480232,
       "fuel": "GPL",
-      "price": 0.699,
+      "price": 0.719,
       "isSelf": false,
-      "communicatedAt": "2026-10-07T09:19:05.000Z",
+      "communicatedAt": "2026-10-09T04:22:11.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56192,7 +56192,7 @@
           "zoneDistanceKm": 10.5,
           "routeDistanceKm": 0.6,
           "progressKm": 99,
-          "score": 0.092
+          "score": 0.1138
         }
       ]
     },
@@ -56221,7 +56221,7 @@
           "zoneDistanceKm": 8.7,
           "routeDistanceKm": 5.3,
           "progressKm": 615.8,
-          "score": 0.3835
+          "score": 0.2007
         }
       ]
     },
@@ -56250,7 +56250,7 @@
           "zoneDistanceKm": 27,
           "routeDistanceKm": 1.7,
           "progressKm": 599.6,
-          "score": 0.6469
+          "score": 0.6494
         }
       ]
     },
@@ -56279,7 +56279,7 @@
           "zoneDistanceKm": 12.7,
           "routeDistanceKm": 4.3,
           "progressKm": 105.7,
-          "score": 0.2756
+          "score": 0.2576
         }
       ]
     },
@@ -56308,7 +56308,7 @@
           "zoneDistanceKm": 6.3,
           "routeDistanceKm": 0.3,
           "progressKm": 330.4,
-          "score": 0.2206
+          "score": 0.2232
         }
       ]
     },
@@ -56326,7 +56326,7 @@
       "fuel": "GPL",
       "price": 0.729,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T19:48:07.000Z",
+      "communicatedAt": "2026-10-08T20:00:54.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56337,7 +56337,7 @@
           "zoneDistanceKm": 22,
           "routeDistanceKm": 4,
           "progressKm": 503.9,
-          "score": 0.3022
+          "score": 0.2967
         }
       ]
     },
@@ -56355,7 +56355,7 @@
       "fuel": "GPL",
       "price": 0.769,
       "isSelf": false,
-      "communicatedAt": "2026-10-07T18:15:07.000Z",
+      "communicatedAt": "2026-10-08T18:15:06.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56366,7 +56366,7 @@
           "zoneDistanceKm": 10.8,
           "routeDistanceKm": 2.1,
           "progressKm": 473.9,
-          "score": 0.2819
+          "score": 0.2818
         }
       ]
     },
@@ -56395,7 +56395,7 @@
           "zoneDistanceKm": 12.1,
           "routeDistanceKm": 0.6,
           "progressKm": 14.2,
-          "score": 0.1565
+          "score": 0.159
         }
       ]
     },
@@ -56424,7 +56424,7 @@
           "zoneDistanceKm": 24.8,
           "routeDistanceKm": 0.9,
           "progressKm": 600.8,
-          "score": 0.6166
+          "score": 0.6192
         }
       ]
     },
@@ -56453,7 +56453,7 @@
           "zoneDistanceKm": 9.8,
           "routeDistanceKm": 1.7,
           "progressKm": 623.9,
-          "score": 0.5098
+          "score": 0.4712
         }
       ]
     },
@@ -56482,7 +56482,7 @@
           "zoneDistanceKm": 8.1,
           "routeDistanceKm": 0.2,
           "progressKm": 105.4,
-          "score": 0.2963
+          "score": 0.2863
         }
       ]
     },
@@ -56500,7 +56500,7 @@
       "fuel": "GPL",
       "price": 0.719,
       "isSelf": false,
-      "communicatedAt": "2026-10-06T07:14:48.000Z",
+      "communicatedAt": "2026-10-08T08:20:30.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56511,7 +56511,7 @@
           "zoneDistanceKm": 20.9,
           "routeDistanceKm": 1.8,
           "progressKm": 503.5,
-          "score": 0.2236
+          "score": 0.2207
         }
       ]
     },
@@ -56540,7 +56540,7 @@
           "zoneDistanceKm": 6.6,
           "routeDistanceKm": 0,
           "progressKm": 353.9,
-          "score": 0.3515
+          "score": 0.3541
         }
       ]
     },
@@ -56558,7 +56558,7 @@
       "fuel": "GPL",
       "price": 0.738,
       "isSelf": false,
-      "communicatedAt": "2026-10-07T02:13:21.000Z",
+      "communicatedAt": "2026-10-08T14:02:05.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56569,7 +56569,7 @@
           "zoneDistanceKm": 25.1,
           "routeDistanceKm": 2.9,
           "progressKm": 506.9,
-          "score": 0.2915
+          "score": 0.2901
         }
       ]
     },
@@ -56598,7 +56598,7 @@
           "zoneDistanceKm": 15.2,
           "routeDistanceKm": 0.9,
           "progressKm": 17.2,
-          "score": 0.1865
+          "score": 0.1891
         }
       ]
     },
@@ -56627,7 +56627,7 @@
           "zoneDistanceKm": 7.9,
           "routeDistanceKm": 2,
           "progressKm": 625.9,
-          "score": 0.2928
+          "score": 0.11
         }
       ]
     },
@@ -56645,7 +56645,7 @@
       "fuel": "GPL",
       "price": 0.787,
       "isSelf": false,
-      "communicatedAt": "2026-10-07T07:10:06.000Z",
+      "communicatedAt": "2026-10-08T07:07:37.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56656,7 +56656,7 @@
           "zoneDistanceKm": 2,
           "routeDistanceKm": 1.9,
           "progressKm": 631.7,
-          "score": 0.5392
+          "score": 0.535
         }
       ]
     },
@@ -56685,7 +56685,7 @@
           "zoneDistanceKm": 4.4,
           "routeDistanceKm": 2,
           "progressKm": 328.2,
-          "score": 0.2567
+          "score": 0.2593
         }
       ]
     },
@@ -56703,7 +56703,7 @@
       "fuel": "GPL",
       "price": 0.715,
       "isSelf": false,
-      "communicatedAt": "2026-10-07T07:26:22.000Z",
+      "communicatedAt": "2026-10-08T07:01:25.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -56732,7 +56732,7 @@
       "fuel": "GPL",
       "price": 0.749,
       "isSelf": false,
-      "communicatedAt": "2026-10-07T04:01:18.000Z",
+      "communicatedAt": "2026-10-09T04:43:21.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56743,7 +56743,7 @@
           "zoneDistanceKm": 5,
           "routeDistanceKm": 5,
           "progressKm": 362.7,
-          "score": 0.3533
+          "score": 0.3504
         },
         {
           "legId": "day-2",
@@ -56754,7 +56754,7 @@
           "zoneDistanceKm": 5,
           "routeDistanceKm": 1.7,
           "progressKm": 5,
-          "score": 0.2986
+          "score": 0.2958
         }
       ]
     },
@@ -56783,7 +56783,7 @@
           "zoneDistanceKm": 5,
           "routeDistanceKm": 1.7,
           "progressKm": 5,
-          "score": 0.4075
+          "score": 0.4101
         }
       ]
     },
@@ -56801,7 +56801,7 @@
       "fuel": "GPL",
       "price": 0.749,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T19:48:04.000Z",
+      "communicatedAt": "2026-10-08T19:59:45.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56812,7 +56812,7 @@
           "zoneDistanceKm": 7.2,
           "routeDistanceKm": 6.4,
           "progressKm": 359.2,
-          "score": 0.4089
+          "score": 0.4034
         },
         {
           "legId": "day-2",
@@ -56823,7 +56823,7 @@
           "zoneDistanceKm": 7.2,
           "routeDistanceKm": 5.2,
           "progressKm": 5,
-          "score": 0.4102
+          "score": 0.4047
         }
       ]
     },
@@ -56852,7 +56852,7 @@
           "zoneDistanceKm": 18.5,
           "routeDistanceKm": 4.7,
           "progressKm": 500.8,
-          "score": 0.1795
+          "score": 0.182
         }
       ]
     },
@@ -56881,7 +56881,7 @@
           "zoneDistanceKm": 6.1,
           "routeDistanceKm": 2.6,
           "progressKm": 354.6,
-          "score": 0.4165
+          "score": 0.4191
         }
       ]
     },
@@ -56910,7 +56910,7 @@
           "zoneDistanceKm": 17,
           "routeDistanceKm": 3.5,
           "progressKm": 93.2,
-          "score": 0.3266
+          "score": 0.3108
         }
       ]
     },
@@ -56928,7 +56928,7 @@
       "fuel": "GPL",
       "price": 0.769,
       "isSelf": false,
-      "communicatedAt": "2026-10-06T17:07:11.000Z",
+      "communicatedAt": "2026-10-09T04:10:39.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56939,7 +56939,7 @@
           "zoneDistanceKm": 3.3,
           "routeDistanceKm": 3.3,
           "progressKm": 362.7,
-          "score": 0.4178
+          "score": 0.4138
         }
       ]
     },
@@ -56957,7 +56957,7 @@
       "fuel": "GPL",
       "price": 0.769,
       "isSelf": false,
-      "communicatedAt": "2026-10-06T16:10:03.000Z",
+      "communicatedAt": "2026-10-08T13:20:27.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -56968,7 +56968,7 @@
           "zoneDistanceKm": 2.8,
           "routeDistanceKm": 0.5,
           "progressKm": 357.9,
-          "score": 0.3399
+          "score": 0.3375
         },
         {
           "legId": "day-2",
@@ -56979,7 +56979,7 @@
           "zoneDistanceKm": 2.8,
           "routeDistanceKm": 2.8,
           "progressKm": 0.4,
-          "score": 0.4213
+          "score": 0.4188
         }
       ]
     },
@@ -57008,7 +57008,7 @@
           "zoneDistanceKm": 12.3,
           "routeDistanceKm": 0,
           "progressKm": 346.7,
-          "score": 0.3306
+          "score": 0.3332
         }
       ]
     },
@@ -57026,7 +57026,7 @@
       "fuel": "GPL",
       "price": 0.768,
       "isSelf": false,
-      "communicatedAt": "2026-10-07T20:00:18.000Z",
+      "communicatedAt": "2026-10-08T09:02:51.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -57037,7 +57037,7 @@
           "zoneDistanceKm": 3.3,
           "routeDistanceKm": 0.4,
           "progressKm": 358.3,
-          "score": 0.3315
+          "score": 0.3326
         }
       ]
     },
@@ -57066,7 +57066,7 @@
           "zoneDistanceKm": 17,
           "routeDistanceKm": 5,
           "progressKm": 500.6,
-          "score": 0.2432
+          "score": 0.2458
         }
       ]
     },
@@ -57095,7 +57095,7 @@
           "zoneDistanceKm": 31.5,
           "routeDistanceKm": 2.2,
           "progressKm": 446.9,
-          "score": 0.2422
+          "score": 0.2448
         }
       ]
     },
@@ -57124,7 +57124,7 @@
           "zoneDistanceKm": 21.3,
           "routeDistanceKm": 2.9,
           "progressKm": 503.4,
-          "score": 0.2214
+          "score": 0.224
         }
       ]
     },
@@ -57153,7 +57153,7 @@
           "zoneDistanceKm": 11.7,
           "routeDistanceKm": 11.7,
           "progressKm": 362.7,
-          "score": 0.4009
+          "score": 0.4035
         },
         {
           "legId": "day-2",
@@ -57164,7 +57164,7 @@
           "zoneDistanceKm": 11.7,
           "routeDistanceKm": 0,
           "progressKm": 13.7,
-          "score": 0.1422
+          "score": 0.1448
         }
       ]
     },
@@ -57182,7 +57182,7 @@
       "fuel": "GPL",
       "price": 0.629,
       "isSelf": false,
-      "communicatedAt": "2026-10-07T16:50:33.000Z",
+      "communicatedAt": "2026-10-08T17:01:13.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57193,7 +57193,7 @@
           "zoneDistanceKm": 29.2,
           "routeDistanceKm": 1.2,
           "progressKm": 354.6,
-          "score": 0.0911
+          "score": 0.091
         }
       ]
     },
@@ -57222,7 +57222,7 @@
           "zoneDistanceKm": 12,
           "routeDistanceKm": 12,
           "progressKm": 362.7,
-          "score": 0.4063
+          "score": 0.4089
         },
         {
           "legId": "day-2",
@@ -57233,7 +57233,7 @@
           "zoneDistanceKm": 12,
           "routeDistanceKm": 7.2,
           "progressKm": 9.8,
-          "score": 0.3317
+          "score": 0.3342
         }
       ]
     },
@@ -57262,7 +57262,7 @@
           "zoneDistanceKm": 14,
           "routeDistanceKm": 1,
           "progressKm": 16.1,
-          "score": 0.1277
+          "score": 0.1303
         }
       ]
     },
@@ -57280,7 +57280,7 @@
       "fuel": "GPL",
       "price": 0.774,
       "isSelf": false,
-      "communicatedAt": "2026-10-06T05:29:21.000Z",
+      "communicatedAt": "2026-10-08T09:31:11.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57291,7 +57291,7 @@
           "zoneDistanceKm": 5.4,
           "routeDistanceKm": 0.8,
           "progressKm": 328.9,
-          "score": 0.2724
+          "score": 0.2692
         }
       ]
     },
@@ -57320,7 +57320,7 @@
           "zoneDistanceKm": 4.4,
           "routeDistanceKm": 0.6,
           "progressKm": 117.2,
-          "score": 0.2917
+          "score": 0.2823
         }
       ]
     },
@@ -57338,7 +57338,7 @@
       "fuel": "GPL",
       "price": 0.719,
       "isSelf": false,
-      "communicatedAt": "2026-10-06T13:49:08.000Z",
+      "communicatedAt": "2026-10-09T03:59:02.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -57349,7 +57349,7 @@
           "zoneDistanceKm": 8.1,
           "routeDistanceKm": 1.7,
           "progressKm": 100,
-          "score": 0.1532
+          "score": 0.1272
         }
       ]
     },
@@ -57367,7 +57367,7 @@
       "fuel": "GPL",
       "price": 0.769,
       "isSelf": false,
-      "communicatedAt": "2026-10-07T05:22:34.000Z",
+      "communicatedAt": "2026-10-08T06:17:49.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57378,7 +57378,7 @@
           "zoneDistanceKm": 5.7,
           "routeDistanceKm": 1.7,
           "progressKm": 330.7,
-          "score": 0.2863
+          "score": 0.2861
         }
       ]
     },
@@ -57396,7 +57396,7 @@
       "fuel": "GPL",
       "price": 0.699,
       "isSelf": false,
-      "communicatedAt": "2026-10-06T05:10:16.000Z",
+      "communicatedAt": "2026-10-09T05:12:40.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57407,7 +57407,7 @@
           "zoneDistanceKm": 17.6,
           "routeDistanceKm": 10.7,
           "progressKm": 624,
-          "score": 0.5657
+          "score": 0.3749
         }
       ]
     },
@@ -57436,7 +57436,7 @@
           "zoneDistanceKm": 3,
           "routeDistanceKm": 2.3,
           "progressKm": 324.1,
-          "score": 0.2933
+          "score": 0.2959
         }
       ]
     },
@@ -57454,7 +57454,7 @@
       "fuel": "GPL",
       "price": 0.719,
       "isSelf": false,
-      "communicatedAt": "2026-10-06T07:18:08.000Z",
+      "communicatedAt": "2026-10-08T08:16:01.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57465,7 +57465,7 @@
           "zoneDistanceKm": 21.6,
           "routeDistanceKm": 1.8,
           "progressKm": 504,
-          "score": 0.2253
+          "score": 0.2225
         }
       ]
     },
@@ -57483,7 +57483,7 @@
       "fuel": "GPL",
       "price": 0.699,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T19:53:17.000Z",
+      "communicatedAt": "2026-10-08T20:05:33.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57494,7 +57494,7 @@
           "zoneDistanceKm": 44.3,
           "routeDistanceKm": 2.7,
           "progressKm": 527.3,
-          "score": 0.2756
+          "score": 0.2701
         }
       ]
     },
@@ -57523,7 +57523,7 @@
           "zoneDistanceKm": 21.6,
           "routeDistanceKm": 5.6,
           "progressKm": 503.7,
-          "score": 0.233
+          "score": 0.2356
         }
       ]
     },
@@ -57541,7 +57541,7 @@
       "fuel": "GPL",
       "price": 0.729,
       "isSelf": false,
-      "communicatedAt": "2026-10-06T16:46:09.000Z",
+      "communicatedAt": "2026-10-09T05:34:20.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -57552,7 +57552,7 @@
           "zoneDistanceKm": 8.3,
           "routeDistanceKm": 0.5,
           "progressKm": 106.8,
-          "score": 0.1451
+          "score": 0.1203
         }
       ]
     },
@@ -57581,7 +57581,7 @@
           "zoneDistanceKm": 11.3,
           "routeDistanceKm": 2.6,
           "progressKm": 102,
-          "score": 0.3112
+          "score": 0.2978
         }
       ]
     },
@@ -57599,7 +57599,7 @@
       "fuel": "GPL",
       "price": 0.759,
       "isSelf": false,
-      "communicatedAt": "2026-10-05T19:55:28.000Z",
+      "communicatedAt": "2026-10-08T20:05:40.000Z",
       "matches": [
         {
           "legId": "day-1",
@@ -57610,7 +57610,7 @@
           "zoneDistanceKm": 6.8,
           "routeDistanceKm": 1,
           "progressKm": 114.3,
-          "score": 0.2193
+          "score": 0.1967
         }
       ]
     },
@@ -57639,7 +57639,7 @@
           "zoneDistanceKm": 8.7,
           "routeDistanceKm": 0.5,
           "progressKm": 623.9,
-          "score": 0.4715
+          "score": 0.4328
         }
       ]
     },
@@ -57668,7 +57668,7 @@
           "zoneDistanceKm": 10.3,
           "routeDistanceKm": 1,
           "progressKm": 312.9,
-          "score": 0.2763
+          "score": 0.2789
         }
       ]
     },
@@ -57697,7 +57697,7 @@
           "zoneDistanceKm": 3.3,
           "routeDistanceKm": 1.5,
           "progressKm": 320,
-          "score": 0.2768
+          "score": 0.2793
         }
       ]
     },
@@ -57713,9 +57713,9 @@
       "lat": 40.7792102,
       "lng": 17.2335661,
       "fuel": "GPL",
-      "price": 0.637,
+      "price": 0.697,
       "isSelf": false,
-      "communicatedAt": "2026-10-04T19:44:14.000Z",
+      "communicatedAt": "2026-10-08T13:43:13.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57726,7 +57726,7 @@
           "zoneDistanceKm": 16.7,
           "routeDistanceKm": 8.4,
           "progressKm": 623.9,
-          "score": 0.3084
+          "score": 0.301
         }
       ]
     },
@@ -57742,9 +57742,9 @@
       "lat": 41.972233524606885,
       "lng": 15.004119944524765,
       "fuel": "GPL",
-      "price": 0.758,
+      "price": 0.795,
       "isSelf": false,
-      "communicatedAt": "2026-10-07T09:19:29.000Z",
+      "communicatedAt": "2026-10-08T09:46:46.000Z",
       "matches": [
         {
           "legId": "day-2",
@@ -57755,7 +57755,7 @@
           "zoneDistanceKm": 28.3,
           "routeDistanceKm": 0.4,
           "progressKm": 353.4,
-          "score": 0.2753
+          "score": 0.3344
         }
       ]
     },
@@ -57784,7 +57784,7 @@
           "zoneDistanceKm": 5.9,
           "routeDistanceKm": 0.4,
           "progressKm": 354.6,
-          "score": 0.1139
+          "score": 0.1165
         },
         {
           "legId": "day-2",
@@ -57795,7 +57795,7 @@
           "zoneDistanceKm": 5.9,
           "routeDistanceKm": 5.9,
           "progressKm": 0,
-          "score": 0.3073
+          "score": 0.3098
         }
       ]
     }
